@@ -110,7 +110,7 @@ If you’d like to improve UI, add new features, or optimize APIs:
 
 ## 🧑‍💻 Author
 
-**Developed by [Utsav](https://github.com/<your-username>)**
+**Developed by [Kuldip](https://github.com/<your-username>)**
 Final Year Student | Java & Web Developer | Passionate about Sustainable Tech Solutions 🌱
 
 ---
@@ -139,11 +139,3 @@ This project is licensed under the **MIT License** — free to use, modify, and 
 
 
 ---
-
-✅ **To use it:**  
-1. Copy everything above into your `README.md` file.  
-2. Replace `<your-username>` with your actual GitHub username.  
-3. Commit and push it to your repository.  
-
-Would you like me to also include a **“Live Demo”** section (for when you host it on GitHub Pages or Netlify)?
-```
