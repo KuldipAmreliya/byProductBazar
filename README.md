@@ -35,18 +35,17 @@ To create a **sustainable online ecosystem** where industries can trade their by
 
 ## 📁 Project Structure
 
-
 ByProductBazaar/
 ├── index.html
 ├── about.html
 ├── contact.html
 ├── products.html
 ├── assets/
-│   ├── css/
-│   │   └── style.css
-│   ├── js/
-│   │   └── script.js
-│   └── images/
+│ ├── css/
+│ │ └── style.css
+│ ├── js/
+│ │ └── script.js
+│ └── images/
 └── README.md
 
 
