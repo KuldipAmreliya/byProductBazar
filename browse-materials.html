@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse Materials - BuyProductBazar</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'navy': '#1e3a8a',
+                        'teal': '#0f766e',
+                        'gold': '#d97706',
+                        'dark-gray': '#374151',
+                        'medium-gray': '#6b7280',
+                        'light-gray': '#f3f4f6'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+        .browse-bg {
+            background-image: linear-gradient(rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.95)),
+                             url('https://images.unsplash.com/photo-1585975754487-5f8b8815e80d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        /* Mobile Menu Styles */
+        .mobile-nav-link {
+            @apply block py-2 px-4 text-white hover:bg-navy rounded-lg transition-colors duration-300;
+        }
+
+        .mobile-nav-btn-primary {
+            @apply block py-2 px-4 bg-white text-navy rounded-lg text-center hover:bg-gray-50 transition-colors duration-300;
+        }
+
+        .mobile-nav-btn-secondary {
+            @apply block py-2 px-4 border-2 border-white text-white rounded-lg text-center hover:bg-white hover:text-navy transition-colors duration-300;
+        }
+
+        /* Hamburger Menu Styles */
+        .hamburger {
+            @apply w-6 h-6 flex flex-col justify-around cursor-pointer;
+        }
+
+        .hamburger span {
+            @apply block w-full h-0.5 bg-white transform transition-all duration-300;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            @apply rotate-45 translate-y-2;
+        }
+
+        .hamburger.active span:nth-child(2) {
+            @apply opacity-0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            @apply -rotate-45 -translate-y-2;
+        }
+
+        /* Mobile Menu Container */
+        #mobileMenu {
+            @apply absolute left-0 right-0 bg-navy shadow-lg z-50;
+            top: 100%;
+            display: none;
+        }
+
+        #mobileMenu.show {
+            display: block;
+        }
+
+        /* Ensure mobile menu appears above other content */
+        nav {
+            @apply relative z-50;
+        }
+
+        /* Add backdrop blur for better visibility */
+        .mobile-menu-backdrop {
+            @apply fixed inset-0 bg-black bg-opacity-50 z-40;
+        }
+
+        /* Mobile Menu Button */
+        #menuBtn {
+            @apply focus:outline-none;
+        }
+    </style>
+</head>
+<body class="browse-bg">
+    <!-- Navigation -->
+    <nav class="bg-navy text-white shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3">
+            <!-- Logo and Menu Container -->
+            <div class="flex justify-between items-center">
+                <!-- Logo -->
+                <a href="index.html" class="flex items-center space-x-2 group">
+                    <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center transform group-hover:rotate-12 transition-transform duration-300">
+                        <svg class="w-6 h-6 text-navy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                        </svg>
+                    </div>
+                    <div class="text-2xl font-bold">
+                        <span class="text-white">BuyProduct</span>
+                        <span class="text-teal">Bazar</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="browse-materials.html" class="nav-link active">Browse</a>
+                    <a href="sell.html" class="nav-link">Sell</a>
+                    <a href="about.html" class="nav-link">About</a>
+                    <a href="login.html" class="nav-link">Login</a>
+                    <a href="register.html" class="px-4 py-2 bg-white text-navy rounded-lg hover:bg-gray-50 transition-colors duration-300">Register</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="menuBtn" class="md:hidden">
+                    <div class="hamburger">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </button>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div id="mobileMenu" class="hidden md:hidden mt-4 pb-4">
+                <div class="flex flex-col space-y-4">
+                    <a href="index.html" class="mobile-nav-link">Home</a>
+                    <a href="browse-materials.html" class="mobile-nav-link active">Browse</a>
+                    <a href="sell.html" class="mobile-nav-link">Sell</a>
+                    <a href="about.html" class="mobile-nav-link">About</a>
+                    <a href="login.html" class="mobile-nav-link">Login</a>
+                    <a href="register.html" class="mobile-nav-btn-primary">Register</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Backdrop -->
+    <div id="mobileMenuBackdrop" class="mobile-menu-backdrop hidden"></div>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-6 sm:py-8">
+        <!-- Search and Filter Section -->
+        <div class="mb-6 sm:mb-8">
+            <!-- Search Bar -->
+            <div class="relative mb-4">
+                <input type="text" 
+                       placeholder="Search materials..." 
+                       class="w-full px-4 py-2 sm:py-3 pl-12 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-teal focus:border-transparent text-sm sm:text-base">
+                <svg class="absolute left-4 top-1/2 transform -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+            </div>
+
+            <!-- Filter Tags -->
+            <div class="flex flex-wrap gap-2 mb-6 sm:mb-8">
+                <span class="px-2 sm:px-3 py-1 bg-teal-100 text-teal-800 rounded-full text-xs sm:text-sm flex items-center">
+                    Chemical Waste
+                    <button class="ml-1 sm:ml-2 text-teal-600 hover:text-teal-800">×</button>
+                </span>
+                <span class="px-2 sm:px-3 py-1 bg-teal-100 text-teal-800 rounded-full text-xs sm:text-sm flex items-center">
+                    Price: 10k-100k
+                    <button class="ml-1 sm:ml-2 text-teal-600 hover:text-teal-800">×</button>
+                </span>
+            </div>
+        </div>
+
+        <!-- Materials Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+            <!-- Chemical Materials -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+                <div class="relative h-40 sm:h-48 lg:h-56">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHl5pGnHdzonNcZGrYGh44IWydpQfDs2tQvQ&s" 
+                         alt="Industrial Chemical Storage - Sulfuric Acid Tanks" 
+                         class="w-full h-full object-cover">
+                    <div class="absolute top-2 sm:top-4 right-2 sm:right-4">
+                        <span class="bg-red-500 text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-medium">Hazardous</span>
+                    </div>
+                </div>
+                <div class="p-3 sm:p-4 lg:p-6">
+                    <h3 class="text-base sm:text-lg lg:text-xl font-semibold text-gray-900 mb-1 sm:mb-2">Sulfuric Acid</h3>
+                    <p class="text-xs sm:text-sm lg:text-base text-gray-600 mb-3 sm:mb-4">98% concentration, industrial grade, properly stored in certified containers</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-base sm:text-lg lg:text-xl font-bold text-teal">₹2,500/L</span>
+                        <button class="bg-navy text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg hover:bg-blue-700 transition-colors duration-300 text-xs sm:text-sm lg:text-base">
+                            View Details
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Electronics Materials -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+                <div class="relative h-40 sm:h-48 lg:h-56">
+                    <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3" 
+                         alt="Sorted Electronic Components from Smartphones" 
+                         class="w-full h-full object-cover">
+                    <div class="absolute top-2 sm:top-4 right-2 sm:right-4">
+                        <span class="bg-gold text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-medium">E-Waste</span>
+                    </div>
+                </div>
+                <div class="p-3 sm:p-4 lg:p-6">
+                    <h3 class="text-base sm:text-lg lg:text-xl font-semibold text-gray-900 mb-1 sm:mb-2">Electronic Components</h3>
+                    <p class="text-xs sm:text-sm lg:text-base text-gray-600 mb-3 sm:mb-4">Sorted smartphone parts, tested and categorized for recycling</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-base sm:text-lg lg:text-xl font-bold text-teal">₹800/kg</span>
+                        <button class="bg-navy text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg hover:bg-blue-700 transition-colors duration-300 text-xs sm:text-sm lg:text-base">
+                            View Details
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Metal Materials -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+                <div class="relative h-40 sm:h-48 lg:h-56">
+                    <img src="https://www.copperwirerecyclingmachinery.com/uploads/202303/1678775078713854.jpg" 
+                         alt="Pure Copper Wire Industrial Scrap" 
+                         class="w-full h-full object-cover">
+                    <div class="absolute top-2 sm:top-4 right-2 sm:right-4">
+                        <span class="bg-green-500 text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-medium">Premium</span>
+                    </div>
+                </div>
+                <div class="p-3 sm:p-4 lg:p-6">
+                    <h3 class="text-base sm:text-lg lg:text-xl font-semibold text-gray-900 mb-1 sm:mb-2">Copper Wire</h3>
+                    <p class="text-xs sm:text-sm lg:text-base text-gray-600 mb-3 sm:mb-4">High purity copper wire, stripped and ready for recycling</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-base sm:text-lg lg:text-xl font-bold text-teal">₹600/kg</span>
+                        <button class="bg-navy text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg hover:bg-blue-700 transition-colors duration-300 text-xs sm:text-sm lg:text-base">
+                            View Details
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Plastic Materials -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+                <div class="relative h-40 sm:h-48 lg:h-56">
+                    <img src="https://s7d1.scene7.com/is/image/CENODS/20210622lnp1-plastic?$responsive$&wid=700&qlt=90,0&resMode=sharp2" 
+                         alt="HDPE Plastic Recycling Material" 
+                         class="w-full h-full object-cover">
+                    <div class="absolute top-2 sm:top-4 right-2 sm:right-4">
+                        <span class="bg-blue-500 text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-medium">Recycled</span>
+                    </div>
+                </div>
+                <div class="p-3 sm:p-4 lg:p-6">
+                    <h3 class="text-base sm:text-lg lg:text-xl font-semibold text-gray-900 mb-1 sm:mb-2">HDPE Plastic</h3>
+                    <p class="text-xs sm:text-sm lg:text-base text-gray-600 mb-3 sm:mb-4">Clean HDPE plastic, sorted and ready for processing</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-base sm:text-lg lg:text-xl font-bold text-teal">₹40/kg</span>
+                        <button class="bg-navy text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg hover:bg-blue-700 transition-colors duration-300 text-xs sm:text-sm lg:text-base">
+                            View Details
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Paper Materials -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+                <div class="relative h-40 sm:h-48 lg:h-56">
+                    <img src="https://thegoldenstar.net/wp-content/uploads/2023/05/32836469_web1_230601-VMS-cardboard-1_1.jpg" 
+                         alt="Industrial Cardboard Waste Bales" 
+                         class="w-full h-full object-cover">
+                    <div class="absolute top-2 sm:top-4 right-2 sm:right-4">
+                        <span class="bg-green-500 text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-medium">Clean</span>
+                    </div>
+                </div>
+                <div class="p-3 sm:p-4 lg:p-6">
+                    <h3 class="text-base sm:text-lg lg:text-xl font-semibold text-gray-900 mb-1 sm:mb-2">Cardboard</h3>
+                    <p class="text-xs sm:text-sm lg:text-base text-gray-600 mb-3 sm:mb-4">Clean cardboard boxes, baled and ready for recycling</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-base sm:text-lg lg:text-xl font-bold text-teal">₹15/kg</span>
+                        <button class="bg-navy text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg hover:bg-blue-700 transition-colors duration-300 text-xs sm:text-sm lg:text-base">
+                            View Details
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Glass Materials -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+                <div class="relative h-40 sm:h-48 lg:h-56">
+                    <img src="data:image/jpeg;base64,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" 
+                         alt="Sorted Glass Waste for Industrial Recycling" 
+                         class="w-full h-full object-cover">
+                    <div class="absolute top-2 sm:top-4 right-2 sm:right-4">
+                        <span class="bg-blue-500 text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-medium">Sorted</span>
+                    </div>
+                </div>
+                <div class="p-3 sm:p-4 lg:p-6">
+                    <h3 class="text-base sm:text-lg lg:text-xl font-semibold text-gray-900 mb-1 sm:mb-2">Glass Waste</h3>
+                    <p class="text-xs sm:text-sm lg:text-base text-gray-600 mb-3 sm:mb-4">Sorted glass bottles and containers, ready for recycling</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-base sm:text-lg lg:text-xl font-bold text-teal">₹20/kg</span>
+                        <button class="bg-navy text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg hover:bg-blue-700 transition-colors duration-300 text-xs sm:text-sm lg:text-base">
+                            View Details
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="flex justify-center mt-6 sm:mt-8 space-x-2">
+            <button class="px-4 sm:px-6 py-1.5 sm:py-2 border border-navy text-navy rounded-lg hover:bg-gray-50 transition-colors duration-300 flex items-center space-x-1 sm:space-x-2 text-sm sm:text-base">
+                <svg class="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+                <span>Previous</span>
+            </button>
+            <button class="px-3 sm:px-4 py-1.5 sm:py-2 bg-navy text-white rounded-lg hover:bg-blue-700 transition-colors duration-300 text-sm sm:text-base">1</button>
+            <button class="px-3 sm:px-4 py-1.5 sm:py-2 border border-navy text-navy rounded-lg hover:bg-gray-50 transition-colors duration-300 text-sm sm:text-base">2</button>
+            <button class="px-3 sm:px-4 py-1.5 sm:py-2 border border-navy text-navy rounded-lg hover:bg-gray-50 transition-colors duration-300 text-sm sm:text-base">3</button>
+            <button class="px-4 sm:px-6 py-1.5 sm:py-2 border border-navy text-navy rounded-lg hover:bg-gray-50 transition-colors duration-300 flex items-center space-x-1 sm:space-x-2 text-sm sm:text-base">
+                <span>Next</span>
+                <svg class="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Add this JavaScript to your script.js -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const menuBtn = document.getElementById('menuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileMenuBackdrop = document.getElementById('mobileMenuBackdrop');
+        const hamburger = menuBtn.querySelector('.hamburger');
+
+        function toggleMobileMenu() {
+            mobileMenu.classList.toggle('hidden');
+            mobileMenu.classList.toggle('show');
+            mobileMenuBackdrop.classList.toggle('hidden');
+            hamburger.classList.toggle('active');
+        }
+
+        menuBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            toggleMobileMenu();
+        });
+
+        // Close mobile menu when clicking backdrop
+        mobileMenuBackdrop.addEventListener('click', function() {
+            toggleMobileMenu();
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!menuBtn.contains(event.target) && !mobileMenu.contains(event.target)) {
+                mobileMenu.classList.add('hidden');
+                mobileMenu.classList.remove('show');
+                mobileMenuBackdrop.classList.add('hidden');
+                hamburger.classList.remove('active');
+            }
+        });
+
+        // Close mobile menu when window is resized to desktop view
+        window.addEventListener('resize', function() {
+            if (window.innerWidth >= 768) { // md breakpoint
+                mobileMenu.classList.add('hidden');
+                mobileMenu.classList.remove('show');
+                mobileMenuBackdrop.classList.add('hidden');
+                hamburger.classList.remove('active');
+            }
+        });
+    });
+    </script>
+
+    
+<script type="text/javascript">
+    (function(d, m){
+        var kommunicateSettings = 
+            {"appId":"1be33d138d57133a876ef57684b498fd7","popupWidget":true,"automaticChatOpenOnNavigation":true};
+        var s = document.createElement("script"); s.type = "text/javascript"; s.async = true;
+        s.src = "https://widget.kommunicate.io/v2/kommunicate.app";
+        var h = document.getElementsByTagName("head")[0]; h.appendChild(s);
+        window.kommunicate = m; m._globals = kommunicateSettings;
+    })(document, window.kommunicate || {});
+/* NOTE : Use web server to view HTML files as real-time update will not work if you directly open the HTML file in the browser. */
+</script>   
+</body>
+</html> 

@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mock Payment - ByProduct Bazaar</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: 'Inter', ui-sans-serif, system-ui, sans-serif; }
+    .tab-active { background: #0f766e; color: #fff; box-shadow: 0 2px 8px #0f766e22; }
+    .tab-inactive { background: #f3f4f6; color: #374151; }
+    .animate-fadeInUp { opacity: 0; animation: fadeInUp 0.7s cubic-bezier(0.23, 1, 0.32, 1) forwards; }
+    @keyframes fadeInUp { 0% { opacity: 0; transform: translateY(40px); } 100% { opacity: 1; transform: translateY(0); } }
+    .pay-card { box-shadow: 0 8px 32px rgba(30,58,138,0.10), 0 1.5px 4px rgba(15,118,110,0.08); }
+    .secure-badge { background: #e0f2fe; color: #0f766e; font-weight: 600; font-size: 0.95rem; border-radius: 0.5rem; padding: 0.25rem 0.75rem; display: inline-flex; align-items: center; gap: 0.4rem; }
+    .pay-amount { font-size: 2.5rem; font-weight: 800; color: #0f766e; letter-spacing: 1px; }
+    .pay-label { color: #6b7280; font-size: 1.1rem; }
+    .order-summary { background: #f3f4f6; border-radius: 0.75rem; padding: 1.2rem 1.5rem; margin-bottom: 1.5rem; }
+    .pay-tabs { border-radius: 0.75rem; background: #f9fafb; }
+    .pay-tabs button { transition: background 0.2s, color 0.2s, box-shadow 0.2s; }
+    .pay-btn { font-size: 1.15rem; font-weight: 700; border-radius: 0.5rem; }
+    .wallet-btn { background: #f3f4f6; color: #374151; border-radius: 0.5rem; padding: 0.5rem 1.2rem; font-weight: 600; border: 1px solid #e5e7eb; transition: background 0.2s, color 0.2s; }
+    .wallet-btn:hover { background: #0f766e; color: #fff; border-color: #0f766e; }
+    .pay-success-anim { animation: popIn 0.7s cubic-bezier(0.23, 1, 0.32, 1); }
+    @keyframes popIn { 0% { transform: scale(0.7); opacity: 0; } 80% { transform: scale(1.1); opacity: 1; } 100% { transform: scale(1); opacity: 1; } }
+    .step-indicator { font-size: 0.95rem; color: #0f766e; font-weight: 600; letter-spacing: 0.5px; margin-bottom: 0.5rem; }
+    .footer-link { color: #6b7280; transition: color 0.2s; }
+    .footer-link:hover { color: #0f766e; }
+    .bg-anim {
+      background: linear-gradient(120deg, #e0f2fe 0%, #f0fdfa 100%);
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      animation: bgMove 12s linear infinite alternate;
+    }
+    @keyframes bgMove { 0% { background-position: 0% 50%; } 100% { background-position: 100% 50%; } }
+    .confetti { position: absolute; pointer-events: none; z-index: 100; }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col relative bg-light-gray text-dark-gray">
+  <div class="bg-anim"></div>
+  <!-- Navigation (from index.html) -->
+  <nav class="bg-white shadow-sm sticky top-0 z-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="flex justify-between items-center h-16">
+              <!-- Logo -->
+              <div class="flex items-center">
+                  <div class="w-10 h-10 bg-teal rounded-lg flex items-center justify-center mr-3">
+                      <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+                      </svg>
+                  </div>
+                  <span class="text-xl font-bold text-navy">ByProduct Bazaar</span>
+              </div>
+              <!-- Desktop Menu -->
+              <div class="hidden md:flex items-center space-x-8">
+                  <a href="index.html" class="text-gray-600 hover:text-navy transition-colors">Home</a>
+                  <a href="browse-waste.html" class="text-gray-600 hover:text-navy transition-colors">Browse Waste</a>
+                  <a href="sell-waste.html" class="text-gray-600 hover:text-navy transition-colors">Sell Waste</a>
+                  <a href="about.html" class="text-gray-600 hover:text-navy transition-colors">About</a>
+                  <a href="transport.html" class="text-gray-600 hover:text-navy transition-colors">Transport</a>
+                  <a href="contact.html" class="text-gray-600 hover:text-navy transition-colors">Contact Us</a>
+                  <a href="login.html" class="btn-primary">Login</a>
+              </div>
+              <!-- Mobile menu button -->
+              <div class="md:hidden">
+                  <button id="mobileMenuBtn" class="text-gray-600 hover:text-navy">
+                      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                      </svg>
+                  </button>
+              </div>
+          </div>
+          <!-- Mobile Menu -->
+          <div id="mobileMenu" class="md:hidden hidden bg-white shadow-lg border-t border-gray-200">
+              <div class="flex flex-col space-y-4 p-4">
+                  <a href="index.html" class="text-gray-600 hover:text-navy transition-colors">Home</a>
+                  <a href="browse-waste.html" class="text-gray-600 hover:text-navy transition-colors">Browse Waste</a>
+                  <a href="sell-waste.html" class="text-gray-600 hover:text-navy transition-colors">Sell Waste</a>
+                  <a href="about.html" class="text-gray-600 hover:text-navy transition-colors">About</a>
+                  <a href="transport.html" class="text-gray-600 hover:text-navy transition-colors">Transport</a>
+                  <a href="contact.html" class="text-gray-600 hover:text-navy transition-colors">Contact Us</a>
+                  <a href="login.html" class="btn-primary text-center">Login</a>
+              </div>
+          </div>
+      </div>
+  </nav>
+  <!-- Payment Card -->
+  <main class="flex-1 flex flex-col items-center justify-center py-10 px-2 animate-fadeInUp relative z-10">
+    <div class="w-full max-w-lg bg-white rounded-2xl shadow-2xl p-0 overflow-hidden border border-gray-200">
+      <!-- Header -->
+      <div class="bg-gradient-to-r from-navy to-teal-700 px-8 py-6 flex flex-col items-center relative">
+        <div class="absolute inset-0 bg-black/20 rounded-b-2xl pointer-events-none"></div>
+        <div class="flex items-center gap-2 mb-2 relative z-10">
+          <svg class="w-8 h-8 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path></svg>
+          <span class="text-white text-3xl font-extrabold tracking-tight drop-shadow-lg" style="text-shadow:0 2px 8px #0006;">Payment</span>
+          <span class="ml-2"><svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c0-1.104.896-2 2-2s2 .896 2 2-.896 2-2 2-2-.896-2-2zm0 0V7a4 4 0 10-8 0v4a4 4 0 008 0z"/></svg></span>
+        </div>
+        <span class="pay-label text-white font-semibold text-lg relative z-10 drop-shadow-lg" style="text-shadow:0 2px 8px #0006;">ByProduct Bazaar Secure Gateway</span>
+        <div class="step-indicator text-center pt-2 text-white/90">Step 2 of 2: Payment</div>
+      </div>
+      <div class="px-8 py-6">
+        <!-- Order Summary -->
+        <div class="order-summary flex items-center gap-4 mb-4">
+          <img src="Images/sulphuric-acid-1000x1000.jpg" alt="Product" class="w-14 h-14 rounded-lg object-cover border border-gray-200 shadow-sm"/>
+          <div class="flex-1">
+            <div class="font-semibold text-dark-gray">Sulphuric Acid (Industrial Grade)</div>
+            <div class="text-xs text-medium-gray">Order ID: #WASTE12345</div>
+            <div class="text-xs text-medium-gray">Seller: ABC Chemicals Pvt Ltd</div>
+          </div>
+          <div class="text-right">
+            <div class="pay-label">Total</div>
+            <div class="pay-amount" id="payAmount">₹<span>5000</span> <span class="text-base font-semibold text-gray-400">INR</span></div>
+          </div>
+        </div>
+        <div class="flex justify-end text-sm text-gray-500 mb-2">Subtotal: ₹4800 &nbsp;|&nbsp; Tax: ₹200</div>
+        <!-- Security Badges -->
+        <div class="flex items-center gap-3 mb-6">
+          <span class="secure-badge"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c0-1.104.896-2 2-2s2 .896 2 2-.896 2-2 2-2-.896-2-2zm0 0V7a4 4 0 10-8 0v4a4 4 0 008 0z"/></svg>100% Secure</span>
+          <span class="secure-badge"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>PCI DSS</span>
+        </div>
+        <!-- Payment Tabs -->
+        <div class="mb-6 pay-tabs">
+          <div class="flex gap-2 mb-4 p-2">
+            <button class="tab-btn tab-active flex-1 py-2 rounded-lg font-semibold flex items-center justify-center gap-2" data-tab="card"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="10" rx="2"/><path d="M2 10h20"/></svg>Card</button>
+            <button class="tab-btn tab-inactive flex-1 py-2 rounded-lg font-semibold flex items-center justify-center gap-2" data-tab="upi"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M3 12l2-2 4 4 8-8 4 4"/></svg>UPI</button>
+            <button class="tab-btn tab-inactive flex-1 py-2 rounded-lg font-semibold flex items-center justify-center gap-2" data-tab="netbanking"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M16 3v4"/></svg>Net Banking</button>
+            <button class="tab-btn tab-inactive flex-1 py-2 rounded-lg font-semibold flex items-center justify-center gap-2" data-tab="wallet"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="10" rx="2"/><path d="M16 11a2 2 0 110 4 2 2 0 010-4z"/></svg>Wallet</button>
+          </div>
+          <div id="tab-card" class="tab-content">
+            <form id="cardPaymentForm" class="space-y-4">
+              <div class="relative">
+                <label class="block text-sm font-medium text-dark-gray mb-1">Card Number</label>
+                <input type="text" maxlength="19" pattern="[0-9 ]*" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-teal focus:ring-1 focus:ring-teal pl-12" placeholder="1234 5678 9012 3456" oninput="formatCardNumber(this)" />
+                <span class="absolute left-3 top-10 text-gray-400"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="10" rx="2"/><path d="M2 10h20"/></svg></span>
+              </div>
+              <div class="flex gap-4">
+                <div class="flex-1 relative">
+                  <label class="block text-sm font-medium text-dark-gray mb-1">Expiry <span title="MM/YY" class="cursor-pointer text-gray-400">&#9432;</span></label>
+                  <input type="text" maxlength="5" pattern="[0-9/]*" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-teal focus:ring-1 focus:ring-teal" placeholder="MM/YY" oninput="formatExpiry(this)" />
+                </div>
+                <div class="flex-1 relative">
+                  <label class="block text-sm font-medium text-dark-gray mb-1">CVV <span title="3 or 4 digit code on back of card" class="cursor-pointer text-gray-400">&#9432;</span></label>
+                  <input type="password" maxlength="4" pattern="[0-9]*" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-teal focus:ring-1 focus:ring-teal" placeholder="123" />
+                </div>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-dark-gray mb-1">Name on Card</label>
+                <input type="text" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-teal focus:ring-1 focus:ring-teal" placeholder="Full Name" />
+              </div>
+              <button type="submit" class="btn-gold w-full py-3 text-lg mt-2 pay-btn sticky bottom-0">Pay ₹5000</button>
+            </form>
+          </div>
+          <div id="tab-upi" class="tab-content hidden">
+            <form id="upiPaymentForm" class="space-y-4">
+              <div class="relative">
+                <label class="block text-sm font-medium text-dark-gray mb-1">UPI ID <span title="e.g. yourname@upi" class="cursor-pointer text-gray-400">&#9432;</span></label>
+                <input type="text" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-teal focus:ring-1 focus:ring-teal pl-12" placeholder="yourname@upi" />
+                <span class="absolute left-3 top-10 text-gray-400"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M3 12l2-2 4 4 8-8 4 4"/></svg></span>
+              </div>
+              <button type="submit" class="btn-gold w-full py-3 text-lg mt-2 pay-btn sticky bottom-0">Pay ₹5000</button>
+            </form>
+          </div>
+          <div id="tab-netbanking" class="tab-content hidden">
+            <form id="netbankingPaymentForm" class="space-y-4">
+              <div>
+                <label class="block text-sm font-medium text-dark-gray mb-1">Select Bank</label>
+                <select required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-teal focus:ring-1 focus:ring-teal">
+                  <option value="">Choose Bank</option>
+                  <option>SBI</option>
+                  <option>HDFC</option>
+                  <option>ICICI</option>
+                  <option>Axis</option>
+                  <option>Kotak</option>
+                  <option>Other</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-dark-gray mb-1">Account Number</label>
+                <input type="text" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-teal focus:ring-1 focus:ring-teal" placeholder="1234567890" />
+              </div>
+              <button type="submit" class="btn-gold w-full py-3 text-lg mt-2 pay-btn sticky bottom-0">Pay ₹5000</button>
+            </form>
+          </div>
+          <div id="tab-wallet" class="tab-content hidden">
+            <div class="flex flex-col gap-3">
+              <button class="wallet-btn flex items-center gap-2 justify-center" onclick="showWalletSuccess(event)"><img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Paytm_logo.png" alt="Paytm" class="w-6 h-6 rounded"/>Paytm Wallet</button>
+              <button class="wallet-btn flex items-center gap-2 justify-center" onclick="showWalletSuccess(event)"><img src="https://upload.wikimedia.org/wikipedia/commons/f/f0/PhonePe-Logo.png" alt="PhonePe" class="w-6 h-6 rounded"/>PhonePe</button>
+              <button class="wallet-btn flex items-center gap-2 justify-center" onclick="showWalletSuccess(event)"><img src="https://upload.wikimedia.org/wikipedia/commons/4/4c/Google_Pay_Logo.svg" alt="Google Pay" class="w-6 h-6 rounded"/>Google Pay</button>
+              <button class="wallet-btn flex items-center gap-2 justify-center" onclick="showWalletSuccess(event)"><svg class="w-6 h-6 text-navy" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="10" rx="2"/><path d="M16 11a2 2 0 110 4 2 2 0 010-4z"/></svg>Other Wallet</button>
+            </div>
+          </div>
+        </div>
+        <!-- Security Message & Help -->
+        <div class="flex flex-col items-center gap-2 mt-4 mb-2">
+          <div class="flex items-center gap-2 text-teal-700 text-sm"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c0-1.104.896-2 2-2s2 .896 2 2-.896 2-2 2-2-.896-2-2zm0 0V7a4 4 0 10-8 0v4a4 4 0 008 0z"/></svg>Your payment is encrypted and secure</div>
+          <a href="#" class="text-xs text-navy underline hover:text-gold">Need help? Contact support</a>
+        </div>
+        <!-- Payment Success Message -->
+        <div id="paymentSuccess" class="hidden text-center mt-8 pay-success-anim relative">
+          <svg class="mx-auto mb-2" width="64" height="64" fill="none" stroke="#0f766e" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="#0f766e" stroke-width="2" fill="#ccfbf1"/><path d="M8 12l2 2l4-4" stroke="#0f766e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <h3 class="text-2xl font-bold text-teal mb-2">Payment Successful!</h3>
+          <p class="text-medium-gray">This was a mock payment for demo purposes only.</p>
+          <div id="confetti-container"></div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <!-- Footer (from index.html) -->
+  <footer class="bg-dark-gray text-white py-12 mt-12">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="grid md:grid-cols-4 gap-8">
+              <div>
+                  <h3 class="text-lg font-semibold mb-4 text-gold">ByProduct Bazaar</h3>
+                  <p class="text-gray-300">India's premier B2B marketplace for industrial waste trading.</p>
+              </div>
+              <div>
+                  <h4 class="font-semibold mb-3">Services</h4>
+                  <ul class="space-y-2 text-gray-300">
+                      <li><a href="#" class="hover:text-white transition-colors">Storage</a></li>
+                      <li><a href="transport.html" class="hover:text-white transition-colors">Transport</a></li>
+                      <li><a href="escrow.html" class="hover:text-white transition-colors">Escrow</a></li>
+                  </ul>
+              </div>
+              <div>
+                  <h4 class="font-semibold mb-3">Company</h4>
+                  <ul class="space-y-2 text-gray-300">
+                      <li><a href="about.html" class="hover:text-white transition-colors">About</a></li>
+                      <li><a href="contact.html" class="hover:text-white transition-colors">Contact</a></li>
+                      <li><a href="privacy.html" class="hover:text-white transition-colors">Privacy</a></li>
+                  </ul>
+              </div>
+              <div>
+                  <h4 class="font-semibold mb-3">Connect</h4>
+                  <div class="flex space-x-4">
+                      <div class="w-10 h-10 bg-teal rounded-lg flex items-center justify-center">
+                          <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                              <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
+                          </svg>
+                      </div>
+                      <div class="w-10 h-10 bg-teal rounded-lg flex items-center justify-center">
+                          <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                              <path d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z"/>
+                          </svg>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="border-t border-gray-600 mt-8 pt-8 text-center text-gray-300">
+              <p>&copy; 2025 ByProduct Bazaar. All rights reserved.</p>
+          </div>
+      </div>
+  </footer>
+
+  <script>
+    // Tab switching logic
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('tab-active', 'tab-inactive'));
+        this.classList.add('tab-active');
+        document.querySelectorAll('.tab-btn').forEach(b => { if (!b.classList.contains('tab-active')) b.classList.add('tab-inactive'); });
+        document.querySelectorAll('.tab-content').forEach(tab => tab.classList.add('hidden'));
+        document.getElementById('tab-' + this.dataset.tab).classList.remove('hidden');
+      });
+    });
+
+    // Card input mask
+    window.formatCardNumber = function(input) {
+      let value = input.value.replace(/\D/g, '').slice(0,16);
+      let formatted = value.replace(/(.{4})/g, '$1 ').trim();
+      input.value = formatted;
+    }
+    window.formatExpiry = function(input) {
+      let value = input.value.replace(/\D/g, '').slice(0,4);
+      if (value.length > 2) value = value.slice(0,2) + '/' + value.slice(2);
+      input.value = value;
+    }
+
+    // Payment forms logic
+    function handlePaymentForm(form) {
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        document.getElementById('paymentSuccess').classList.remove('hidden');
+        launchConfetti();
+        setTimeout(() => {
+          document.getElementById('paymentSuccess').classList.add('hidden');
+          form.reset();
+          clearConfetti();
+        }, 2200);
+      });
+    }
+    handlePaymentForm(document.getElementById('cardPaymentForm'));
+    handlePaymentForm(document.getElementById('upiPaymentForm'));
+    handlePaymentForm(document.getElementById('netbankingPaymentForm'));
+
+    // Wallet payment mock
+    window.showWalletSuccess = function(e) {
+      e.preventDefault();
+      document.getElementById('paymentSuccess').classList.remove('hidden');
+      launchConfetti();
+      setTimeout(() => {
+        document.getElementById('paymentSuccess').classList.add('hidden');
+        clearConfetti();
+      }, 2200);
+    }
+
+    // Confetti animation
+    function launchConfetti() {
+      const container = document.getElementById('confetti-container');
+      container.innerHTML = '';
+      for (let i = 0; i < 32; i++) {
+        const conf = document.createElement('div');
+        conf.className = 'confetti';
+        conf.style.left = Math.random()*100+'%';
+        conf.style.top = (Math.random()*40+10)+'%';
+        conf.style.width = conf.style.height = (Math.random()*8+6)+'px';
+        conf.style.background = `hsl(${Math.random()*360},80%,60%)`;
+        conf.style.borderRadius = '50%';
+        conf.style.opacity = 0.8;
+        conf.style.transform = `translateY(-60px)`;
+        conf.style.transition = 'transform 1.8s cubic-bezier(.23,1,.32,1), opacity 1.8s';
+        container.appendChild(conf);
+        setTimeout(() => {
+          conf.style.transform = `translateY(120px)`;
+          conf.style.opacity = 0;
+        }, 50);
+      }
+    }
+    function clearConfetti() {
+      const container = document.getElementById('confetti-container');
+      container.innerHTML = '';
+    }
+
+    // Mobile menu toggle (from index.html)
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    if (mobileMenuBtn && mobileMenu) {
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    }
+  </script>
+</body>
+</html> 

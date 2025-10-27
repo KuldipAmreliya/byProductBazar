@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List Your Waste - ByProduct Bazaar</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'navy': '#1e3a8a',
+                        'teal': '#0f766e',
+                        'gold': '#d97706',
+                        'dark-gray': '#374151',
+                        'medium-gray': '#6b7280',
+                        'light-gray': '#f3f4f6'
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="styles.css">
+    <script src="main.js" defer></script>
+</head>
+<body class="list-waste-bg">
+    <!-- Navigation -->
+    <nav class="bg-navy text-white shadow-lg">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <a href="index.html" class="text-xl font-bold">ByProduct Bazaar</a>
+                <div class="space-x-4">
+                    <a href="index.html" class="hover:text-teal">Home</a>
+                    <a href="browse-materials.html" class="hover:text-teal">Buy</a>
+                    <a href="start-selling.html" class="hover:text-teal">Sell</a>
+                    <a href="about.html" class="hover:text-teal">About</a>
+                    <a href="login.html" class="hover:text-teal">Login</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- List Waste Form -->
+    <div class="container mx-auto px-4 py-12">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-12 animate-fade-in">
+                <h1 class="text-4xl font-bold mb-4">List Your Waste Materials</h1>
+                <p class="text-xl text-medium-gray">Provide detailed information about your waste materials</p>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-md p-8 animate-slide-up">
+                <form class="space-y-6" id="wasteListingForm">
+                    <!-- Basic Information -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-dark-gray mb-2">Material Type</label>
+                            <select class="form-input">
+                                <option>Chemical Waste</option>
+                                <option>Metal Waste</option>
+                                <option>Electronic Waste</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-dark-gray mb-2">Quantity Available</label>
+                            <div class="flex space-x-4">
+                                <input type="number" class="form-input" placeholder="Amount">
+                                <select class="form-input w-1/3">
+                                    <option>Liters</option>
+                                    <option>Kilograms</option>
+                                    <option>Tons</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Chemical Properties -->
+                    <div class="space-y-4">
+                        <h3 class="text-lg font-semibold">Chemical Properties</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium text-dark-gray mb-2">Concentration/Purity</label>
+                                <input type="text" class="form-input" placeholder="e.g., 98%">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-dark-gray mb-2">Physical State</label>
+                                <select class="form-input">
+                                    <option>Liquid</option>
+                                    <option>Solid</option>
+                                    <option>Gas</option>
+                                    <option>Slurry</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pricing -->
+                    <div>
+                        <label class="block text-sm font-medium text-dark-gray mb-2">Price per Unit</label>
+                        <div class="flex items-center">
+                            <span class="text-gray-500 mr-2">$</span>
+                            <input type="number" class="form-input" placeholder="Price">
+                        </div>
+                    </div>
+
+                    <!-- Description -->
+                    <div>
+                        <label class="block text-sm font-medium text-dark-gray mb-2">Detailed Description</label>
+                        <textarea rows="4" class="form-input" placeholder="Provide detailed information about the material..."></textarea>
+                    </div>
+
+                    <!-- Safety Information -->
+                    <div class="space-y-4">
+                        <h3 class="text-lg font-semibold">Safety Information</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium text-dark-gray mb-2">Hazard Class</label>
+                                <input type="text" class="form-input" placeholder="e.g., Class 8">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-dark-gray mb-2">UN Number</label>
+                                <input type="text" class="form-input" placeholder="e.g., UN1830">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Upload Section -->
+                    <div>
+                        <label class="block text-sm font-medium text-dark-gray mb-2">Safety Data Sheet (SDS)</label>
+                        <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md hover-lift">
+                            <div class="space-y-1 text-center">
+                                <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48">
+                                    <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" 
+                                          stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                                <div class="flex text-sm text-gray-600">
+                                    <label class="relative cursor-pointer bg-white rounded-md font-medium text-teal hover:text-teal-600">
+                                        <span>Upload a file</span>
+                                        <input type="file" class="sr-only">
+                                    </label>
+                                    <p class="pl-1">or drag and drop</p>
+                                </div>
+                                <p class="text-xs text-gray-500">PDF up to 10MB</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Submit Buttons -->
+                    <div class="flex justify-end space-x-4">
+                        <button type="button" class="btn-secondary">Save Draft</button>
+                        <button type="submit" class="btn-primary">Publish Listing</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

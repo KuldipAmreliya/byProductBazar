@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trade Safely - ByProduct Bazaar</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'navy': '#1e3a8a',
+                        'teal': '#0f766e',
+                        'gold': '#d97706',
+                        'dark-gray': '#374151',
+                        'medium-gray': '#6b7280',
+                        'light-gray': '#f3f4f6'
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="styles.css">
+    <script src="main.js" defer></script>
+</head>
+<body class="trade-bg">
+    <!-- Navigation -->
+    <nav class="bg-navy text-white shadow-lg">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <a href="index.html" class="text-xl font-bold">ByProduct Bazaar</a>
+                <div class="space-x-4">
+                    <a href="index.html" class="hover:text-teal">Home</a>
+                    <a href="browse-materials.html" class="hover:text-teal">Buy</a>
+                    <a href="start-selling.html" class="hover:text-teal">Sell</a>
+                    <a href="about.html" class="hover:text-teal">About</a>
+                    <a href="login.html" class="hover:text-teal">Login</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Trade Safely Content -->
+    <div class="container mx-auto px-4 py-12">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-12">
+                <h1 class="text-4xl font-bold mb-4 animate-slide-up">Trade with Confidence</h1>
+                <p class="text-xl text-medium-gray animate-slide-up" style="animation-delay: 0.2s">Our secure platform ensures safe and compliant waste material transactions</p>
+            </div>
+
+            <!-- Safety Features -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                <div class="bg-white rounded-lg shadow-md p-6 hover-lift animate-slide-up" style="animation-delay: 0.3s">
+                    <div class="text-teal text-4xl mb-4">🔒</div>
+                    <h3 class="font-bold text-xl mb-2">Secure Payments</h3>
+                    <p class="text-medium-gray">Protected transactions with escrow service and verified payment processing</p>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-md p-6 hover-lift animate-slide-up" style="animation-delay: 0.4s">
+                    <div class="text-teal text-4xl mb-4">✓</div>
+                    <h3 class="font-bold text-xl mb-2">Verified Partners</h3>
+                    <p class="text-medium-gray">All partners are verified and compliance-checked</p>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-md p-6 hover-lift animate-slide-up" style="animation-delay: 0.5s">
+                    <div class="text-teal text-4xl mb-4">📋</div>
+                    <h3 class="font-bold text-xl mb-2">Documentation</h3>
+                    <p class="text-medium-gray">Automated generation of required waste transfer documentation</p>
+                </div>
+            </div>
+
+            <!-- Process Steps -->
+            <div class="bg-white rounded-lg shadow-md p-8 animate-slide-up" style="animation-delay: 0.6s">
+                <h2 class="text-2xl font-bold mb-6">Secure Trading Process</h2>
+                <div class="space-y-6">
+                    <div class="flex items-start">
+                        <div class="bg-teal-100 rounded-full p-2 mr-4">
+                            <span class="text-teal font-bold">1</span>
+                        </div>
+                        <div>
+                            <h3 class="font-bold mb-2">Verify Documentation</h3>
+                            <p class="text-medium-gray">Review safety data sheets and waste transfer documentation</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start">
+                        <div class="bg-teal-100 rounded-full p-2 mr-4">
+                            <span class="text-teal font-bold">2</span>
+                        </div>
+                        <div>
+                            <h3 class="font-bold mb-2">Secure Payment</h3>
+                            <p class="text-medium-gray">Funds are held in escrow until delivery is confirmed</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start">
+                        <div class="bg-teal-100 rounded-full p-2 mr-4">
+                            <span class="text-teal font-bold">3</span>
+                        </div>
+                        <div>
+                            <h3 class="font-bold mb-2">Track Shipment</h3>
+                            <p class="text-medium-gray">Monitor waste transfer in real-time with our tracking system</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start">
+                        <div class="bg-teal-100 rounded-full p-2 mr-4">
+                            <span class="text-teal font-bold">4</span>
+                        </div>
+                        <div>
+                            <h3 class="font-bold mb-2">Confirm Receipt</h3>
+                            <p class="text-medium-gray">Verify material quality and complete the transaction</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

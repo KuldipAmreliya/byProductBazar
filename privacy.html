@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - ByProduct Bazaar</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'navy': '#1e3a8a',
+                        'teal': '#0f766e',
+                        'gold': '#d97706',
+                        'dark-gray': '#374151',
+                        'medium-gray': '#6b7280',
+                        'light-gray': '#f3f4f6'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #1e3a8a 0%, #0f766e 100%);
+        }
+        .btn-primary {
+            background: #1e3a8a;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            background: #1e40af;
+            transform: translateY(-2px);
+        }
+        .btn-secondary {
+            background: white;
+            color: #1e3a8a;
+            border: 2px solid #1e3a8a;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .btn-secondary:hover {
+            background: #1e3a8a;
+            color: white;
+        }
+    </style>
+</head>
+<body class="bg-light-gray text-dark-gray">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <div class="w-10 h-10 bg-teal rounded-lg flex items-center justify-center mr-3">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+                        </svg>
+                    </div>
+                    <a href="index.html" class="text-xl font-bold text-navy">ByProduct Bazaar</a>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-gray-600 hover:text-navy transition-colors">Home</a>
+                    <a href="browse-waste.html" class="text-gray-600 hover:text-navy transition-colors">Browse Waste</a>
+                    <a href="sell-waste.html" class="text-gray-600 hover:text-navy transition-colors">Sell Waste</a>
+                    <a href="about.html" class="text-gray-600 hover:text-navy transition-colors">About</a>
+                    <a href="login.html" class="btn-primary">Login</a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button id="mobileMenuBtn" class="text-gray-600 hover:text-navy">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div id="mobileMenu" class="md:hidden hidden bg-white shadow-lg border-t border-gray-200">
+                <div class="flex flex-col space-y-4 p-4">
+                    <a href="index.html" class="text-gray-600 hover:text-navy transition-colors">Home</a>
+                    <a href="browse-waste.html" class="text-gray-600 hover:text-navy transition-colors">Browse Waste</a>
+                    <a href="sell-waste.html" class="text-gray-600 hover:text-navy transition-colors">Sell Waste</a>
+                    <a href="about.html" class="text-gray-600 hover:text-navy transition-colors">About</a>
+                    <a href="login.html" class="btn-primary text-center">Login</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="gradient-bg text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h1 class="text-4xl md:text-5xl font-bold mb-6">Privacy Policy</h1>
+                <p class="text-xl mb-8 max-w-3xl mx-auto opacity-90">
+                    Learn how we collect, use, and protect your personal information.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Privacy Content -->
+    <section class="py-16 bg-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="prose prose-lg max-w-none">
+                <div class="mb-8">
+                    <h2 class="text-2xl font-bold text-navy mb-4">1. Information We Collect</h2>
+                    <p class="text-medium-gray mb-4">
+                        We collect information you provide directly to us, such as when you create an account, list materials, or contact us. This may include:
+                    </p>
+                    <ul class="text-medium-gray mb-4 list-disc pl-6 space-y-2">
+                        <li>Name, email address, and phone number</li>
+                        <li>Company information and business details</li>
+                        <li>Payment and billing information</li>
+                        <li>Communication preferences</li>
+                        <li>Listing information and transaction history</li>
+                    </ul>
+                </div>
+
+                <div class="mb-8">
+                    <h2 class="text-2xl font-bold text-navy mb-4">2. How We Use Your Information</h2>
+                    <p class="text-medium-gray mb-4">
+                        We use the information we collect to:
+                    </p>
+                    <ul class="text-medium-gray mb-4 list-disc pl-6 space-y-2">
+                        <li>Provide and maintain our services</li>
+                        <li>Process transactions and payments</li>
+                        <li>Communicate with you about your account</li>
+                        <li>Send you updates and marketing materials</li>
+                        <li>Improve our platform and services</li>
+                        <li>Comply with legal obligations</li>
+                    </ul>
+                </div>
+
+                <div class="mb-8">
+                    <h2 class="text-2xl font-bold text-navy mb-4">3. Information Sharing</h2>
+                    <p class="text-medium-gray mb-4">
+                        We do not sell, trade, or otherwise transfer your personal information to third parties without your consent, except in the following circumstances:
+                    </p>
+                    <ul class="text-medium-gray mb-4 list-disc pl-6 space-y-2">
+                        <li>With your explicit consent</li>
+                        <li>To comply with legal requirements</li>
+                        <li>To protect our rights and safety</li>
+                        <li>With service providers who assist in our operations</li>
+                        <li>In connection with a business transfer or merger</li>
+                    </ul>
+                </div>
+
+                <div class="mb-8">
+                    <h2 class="text-2xl font-bold text-navy mb-4">4. Data Security</h2>
+                    <p class="text-medium-gray mb-4">
+                        We implement appropriate security measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction. These measures include:
+                    </p>
+                    <ul class="text-medium-gray mb-4 list-disc pl-6 space-y-2">
+                        <li>Encryption of sensitive data</li>
+                        <li>Regular security assessments</li>
+                        <li>Access controls and authentication</li>
+                        <li>Secure data storage practices</li>
+                        <li>Employee training on data protection</li>
+                    </ul>
+                </div>
+
+                <div class="mb-8">
+                    <h2 class="text-2xl font-bold text-navy mb-4">5. Cookies and Tracking</h2>
+                    <p class="text-medium-gray mb-4">
+                        We use cookies and similar tracking technologies to enhance your experience on our platform. These technologies help us:
+                    </p>
+                    <ul class="text-medium-gray mb-4 list-disc pl-6 space-y-2">
+                        <li>Remember your preferences</li>
+                        <li>Analyze platform usage</li>
+                        <li>Provide personalized content</li>
+                        <li>Improve our services</li>
+                    </ul>
+                </div>
+
+                <div class="mb-8">
+                    <h2 class="text-2xl font-bold text-navy mb-4">6. Your Rights</h2>
+                    <p class="text-medium-gray mb-4">
+                        You have the right to:
+                    </p>
+                    <ul class="text-medium-gray mb-4 list-disc pl-6 space-y-2">
+                        <li>Access your personal information</li>
+                        <li>Correct inaccurate information</li>
+                        <li>Request deletion of your data</li>
+                        <li>Object to processing of your data</li>
+                        <li>Withdraw consent at any time</li>
+                        <li>Request data portability</li>
+                    </ul>
+                </div>
+
+                <div class="mb-8">
+                    <h2 class="text-2xl font-bold text-navy mb-4">7. Data Retention</h2>
+                    <p class="text-medium-gray mb-4">
+                        We retain your personal information for as long as necessary to provide our services and comply with legal obligations. When we no longer need your information, we will securely delete or anonymize it.
+                    </p>
+                </div>
+
+                <div class="mb-8">
+                    <h2 class="text-2xl font-bold text-navy mb-4">8. International Transfers</h2>
+                    <p class="text-medium-gray mb-4">
+                        Your information may be transferred to and processed in countries other than your own. We ensure that such transfers comply with applicable data protection laws and implement appropriate safeguards.
+                    </p>
+                </div>
+
+                <div class="mb-8">
+                    <h2 class="text-2xl font-bold text-navy mb-4">9. Children's Privacy</h2>
+                    <p class="text-medium-gray mb-4">
+                        Our platform is not intended for children under the age of 18. We do not knowingly collect personal information from children under 18. If you believe we have collected such information, please contact us immediately.
+                    </p>
+                </div>
+
+                <div class="mb-8">
+                    <h2 class="text-2xl font-bold text-navy mb-4">10. Changes to This Policy</h2>
+                    <p class="text-medium-gray mb-4">
+                        We may update this Privacy Policy from time to time. We will notify you of any material changes by posting the new policy on our platform and updating the "Last Updated" date.
+                    </p>
+                </div>
+
+                <div class="mb-8">
+                    <h2 class="text-2xl font-bold text-navy mb-4">11. Contact Us</h2>
+                    <p class="text-medium-gray mb-4">
+                        If you have any questions about this Privacy Policy or our data practices, please contact us at:
+                    </p>
+                    <div class="bg-light-gray p-4 rounded-lg">
+                        <p class="text-medium-gray mb-2">
+                            <strong>Email:</strong> privacy@byproductbazaar.com
+                        </p>
+                        <p class="text-medium-gray mb-2">
+                            <strong>Phone:</strong> +91 98765 43210
+                        </p>
+                        <p class="text-medium-gray">
+                            <strong>Address:</strong> ByProduct Bazaar Pvt. Ltd., 123 Business Park, Sector 15, Gurgaon, Haryana 122001, India
+                        </p>
+                    </div>
+                </div>
+
+                <div class="text-center mt-12">
+                    <p class="text-medium-gray mb-4">
+                        <strong>Last updated:</strong> January 15, 2025
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="contact.html" class="btn-secondary">Contact Us</a>
+                        <a href="index.html" class="btn-primary">Back to Home</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark-gray text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-lg font-semibold mb-4 text-gold">ByProduct Bazaar</h3>
+                    <p class="text-gray-300">India's premier B2B marketplace for industrial waste trading.</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-3">Services</h4>
+                    <ul class="space-y-2 text-gray-300">
+                        <li><a href="#" class="hover:text-white transition-colors">Storage</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Transport</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Escrow</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-3">Company</h4>
+                    <ul class="space-y-2 text-gray-300">
+                        <li><a href="about.html" class="hover:text-white transition-colors">About</a></li>
+                        <li><a href="contact.html" class="hover:text-white transition-colors">Contact</a></li>
+                        <li><a href="privacy.html" class="hover:text-white transition-colors">Privacy</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-3">Connect</h4>
+                    <div class="flex space-x-4">
+                        <div class="w-10 h-10 bg-teal rounded-lg flex items-center justify-center">
+                            <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
+                            </svg>
+                        </div>
+                        <div class="w-10 h-10 bg-teal rounded-lg flex items-center justify-center">
+                            <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-600 mt-8 pt-8 text-center text-gray-300">
+                <p>&copy; 2025 ByProduct Bazaar. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html> 

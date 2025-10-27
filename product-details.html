@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details - ByProduct Bazaar</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'navy': '#1e3a8a',
+                        'teal': '#0f766e',
+                        'gold': '#d97706',
+                        'dark-gray': '#374151',
+                        'medium-gray': '#6b7280',
+                        'light-gray': '#f3f4f6'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #1e3a8a 0%, #0f766e 100%);
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        .btn-primary {
+            background: #1e3a8a;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            background: #1e40af;
+            transform: translateY(-2px);
+        }
+        .btn-secondary {
+            background: white;
+            color: #1e3a8a;
+            border: 2px solid #1e3a8a;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .btn-secondary:hover {
+            background: #1e3a8a;
+            color: white;
+        }
+        .btn-teal {
+            background: #0f766e;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .btn-teal:hover {
+            background: #115e59;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body class="bg-light-gray text-dark-gray">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <div class="w-10 h-10 bg-teal rounded-lg flex items-center justify-center mr-3">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+                        </svg>
+                    </div>
+                    <a href="index.html" class="text-xl font-bold text-navy">ByProduct Bazaar</a>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-gray-600 hover:text-navy transition-colors">Home</a>
+                    <a href="browse-waste.html" class="text-gray-600 hover:text-navy transition-colors">Browse Waste</a>
+                    <a href="sell-waste.html" class="text-gray-600 hover:text-navy transition-colors">Sell Waste</a>
+                    <a href="about.html" class="text-gray-600 hover:text-navy transition-colors">About</a>
+                    <a href="transport.html" class="text-gray-600 hover:text-navy transition-colors">Transport</a>
+                    <a href="contact.html" class="text-gray-600 hover:text-navy transition-colors">Contact Us</a>
+                    <a href="login.html" class="btn-primary">Login</a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button id="mobileMenuBtn" class="text-gray-600 hover:text-navy">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div id="mobileMenu" class="md:hidden hidden bg-white shadow-lg border-t border-gray-200">
+                <div class="flex flex-col space-y-4 p-4">
+                    <a href="index.html" class="text-gray-600 hover:text-navy transition-colors">Home</a>
+                    <a href="browse-waste.html" class="text-gray-600 hover:text-navy transition-colors">Browse Waste</a>
+                    <a href="sell-waste.html" class="text-gray-600 hover:text-navy transition-colors">Sell Waste</a>
+                    <a href="about.html" class="text-gray-600 hover:text-navy transition-colors">About</a>
+                    <a href="transport.html" class="text-gray-600 hover:text-navy transition-colors">Transport</a>
+                    <a href="contact.html" class="text-gray-600 hover:text-navy transition-colors">Contact Us</a>
+                    <a href="login.html" class="btn-primary text-center">Login</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="py-12">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Breadcrumb -->
+            <div class="mb-8">
+                <nav class="flex" aria-label="Breadcrumb">
+                    <ol class="inline-flex items-center space-x-1 md:space-x-3">
+                        <li class="inline-flex items-center">
+                            <a href="index.html" class="text-gray-600 hover:text-navy">Home</a>
+                        </li>
+                        <li>
+                            <div class="flex items-center">
+                                <svg class="w-4 h-4 text-gray-400 mx-1" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                <a href="browse-waste.html" class="text-gray-600 hover:text-navy">Browse Waste</a>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="flex items-center">
+                                <svg class="w-4 h-4 text-gray-400 mx-1" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span class="text-gray-500" id="productName">Steel Scrap</span>
+                            </div>
+                        </li>
+                    </ol>
+                </nav>
+            </div>
+
+            <!-- Product Details -->
+            <div class="grid lg:grid-cols-2 gap-12">
+                <!-- Product Image -->
+                <div class="space-y-4">
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden flex items-center justify-center">
+                        <img id="productMainImage" src="images/placeholder.jpg" alt="Product Image" class="w-full max-w-md h-96 object-cover object-center mx-auto" />
+                    </div>
+                </div>
+
+                <!-- Product Info -->
+                <div class="space-y-6">
+                    <div>
+                        <h1 class="text-3xl font-bold text-dark-gray mb-2" id="productTitle">Steel Scrap</h1>
+                        <p class="text-lg text-medium-gray" id="productDescription">High-quality steel scrap, sorted and ready for recycling</p>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-lg p-6">
+                        <div class="grid grid-cols-2 gap-4 mb-6">
+                            <div>
+                                <span class="text-2xl font-bold text-teal" id="productPrice">₹20/kg</span>
+                                <p class="text-sm text-medium-gray">Price per unit</p>
+                            </div>
+                            <div>
+                                <span class="text-2xl font-bold text-dark-gray" id="productQuantity">500 kg</span>
+                                <p class="text-sm text-medium-gray">Available quantity</p>
+                            </div>
+                        </div>
+                        
+                        <div class="space-y-3 mb-6">
+                            <div class="flex justify-between">
+                                <span class="text-medium-gray">Location:</span>
+                                <span class="font-medium" id="productLocation">Ahmedabad, Gujarat</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-medium-gray">Category:</span>
+                                <span class="font-medium" id="productCategory">Metal</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-medium-gray">Condition:</span>
+                                <span class="font-medium" id="productCondition">Good</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-medium-gray">Certification:</span>
+                                <span class="font-medium text-teal" id="productCertification">Available</span>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col sm:flex-row gap-3">
+                            <button id="contactSellerBtn" class="btn-primary flex-1">Contact Seller</button>
+                            <button class="btn-secondary flex-1">Request Quote</button>
+                        </div>
+                    </div>
+
+                    <!-- Seller Info -->
+                    <div class="bg-white rounded-xl shadow-lg p-6">
+                        <h3 class="text-lg font-bold text-dark-gray mb-4">Seller Information</h3>
+                        <div class="flex items-center space-x-4 mb-4">
+                            <div class="w-12 h-12 bg-teal rounded-full flex items-center justify-center">
+                                <span class="text-white font-bold" id="sellerInitials">JS</span>
+                            </div>
+                            <div>
+                                <p class="font-medium" id="sellerName">Jai Steel Industries</p>
+                                <p class="text-sm text-medium-gray">Verified Seller</p>
+                            </div>
+                        </div>
+                        <div class="space-y-2 text-sm">
+                            <p><span class="text-medium-gray">Member since:</span> January 2023</p>
+                            <p><span class="text-medium-gray">Total listings:</span> 15</p>
+                            <p><span class="text-medium-gray">Response rate:</span> 95%</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Description -->
+            <div class="mt-12 bg-white rounded-xl shadow-lg p-8">
+                <h2 class="text-2xl font-bold text-dark-gray mb-6">Product Description</h2>
+                <div class="prose prose-lg max-w-none">
+                    <p class="text-gray-700 leading-relaxed mb-4">
+                        High-quality steel scrap available for immediate purchase. This material has been carefully sorted and processed to ensure maximum recyclability and value.
+                    </p>
+                    <p class="text-gray-700 leading-relaxed mb-4">
+                        <strong>Specifications:</strong>
+                    </p>
+                    <ul class="list-disc list-inside text-gray-700 space-y-2 mb-4">
+                        <li>Steel grade: Carbon steel</li>
+                        <li>Size: Various sizes available (10mm - 50mm)</li>
+                        <li>Purity: 95%+ steel content</li>
+                        <li>Contamination: Less than 5%</li>
+                        <li>Packaging: Loose bulk or palletized</li>
+                    </ul>
+                    <p class="text-gray-700 leading-relaxed">
+                        <strong>Certification:</strong> All material comes with proper documentation and quality certificates. Suitable for steel mills, foundries, and recycling facilities.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Similar Products -->
+            <div class="mt-12">
+                <h2 class="text-2xl font-bold text-dark-gray mb-6">Similar Products</h2>
+                <div class="grid md:grid-cols-3 gap-6" id="similarProducts">
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                        <a href="product-details.html?product=aluminum-scrap" class="block">
+                            <div class="h-48 bg-gradient-to-br from-blue-400 to-blue-600"></div>
+                        </a>
+                        <div class="p-6">
+                            <h3 class="text-lg font-bold text-dark-gray mb-2">Aluminum Scrap</h3>
+                            <p class="text-gray-600 mb-4">Clean aluminum scrap, various grades</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-teal font-bold">₹45/kg</span>
+                                <span class="text-sm text-gray-500">Delhi, DL</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                        <a href="product-details.html?product=copper-wire" class="block">
+                            <div class="h-48 bg-gradient-to-br from-yellow-400 to-orange-500"></div>
+                        </a>
+                        <div class="p-6">
+                            <h3 class="text-lg font-bold text-dark-gray mb-2">Copper Wire</h3>
+                            <p class="text-gray-600 mb-4">Insulated copper wire scrap</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-teal font-bold">₹180/kg</span>
+                                <span class="text-sm text-gray-500">Mumbai, MH</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                        <a href="product-details.html?product=iron-scrap" class="block">
+                            <div class="h-48 bg-gradient-to-br from-purple-400 to-purple-600"></div>
+                        </a>
+                        <div class="p-6">
+                            <h3 class="text-lg font-bold text-dark-gray mb-2">Iron Scrap</h3>
+                            <p class="text-gray-600 mb-4">Heavy iron scrap, ready for processing</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-teal font-bold">₹15/kg</span>
+                                <span class="text-sm text-gray-500">Chennai, TN</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Seller Modal -->
+    <div id="contactModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="bg-white rounded-xl shadow-2xl max-w-md w-full max-h-[90vh] overflow-y-auto">
+                <!-- Modal Header -->
+                <div class="flex justify-between items-center p-6 border-b border-gray-200">
+                    <h3 class="text-xl font-bold text-dark-gray">Contact Seller</h3>
+                    <button id="closeModal" class="text-gray-400 hover:text-gray-600">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Modal Body -->
+                <div class="p-6">
+                    <!-- Seller Info -->
+                    <div class="bg-light-gray rounded-lg p-4 mb-6">
+                        <div class="flex items-center space-x-3 mb-3">
+                            <div class="w-10 h-10 bg-teal rounded-full flex items-center justify-center">
+                                <span class="text-white font-bold">JS</span>
+                            </div>
+                            <div>
+                                <p class="font-medium text-dark-gray">Jai Steel Industries</p>
+                                <p class="text-sm text-medium-gray">Verified Seller</p>
+                            </div>
+                        </div>
+                        <p class="text-sm text-medium-gray">Product: <span class="font-medium">Steel Scrap</span></p>
+                        <p class="text-sm text-medium-gray">Price: <span class="font-medium text-teal">₹20/kg</span></p>
+                    </div>
+
+                    <form method="POST" id="contactSellerForm" class="space-y-4">
+                        <input type="hidden" name="access_key" value="6bdb8625-efdc-4522-baa5-56cc8f0b396b">
+                        <div>
+                            <label for="seller_name" class="block text-sm font-medium text-gray-700 mb-1">Your Name *</label>
+                            <input type="text" id="seller_name" name="name" required class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-navy">
+                        </div>
+                        <div>
+                            <label for="seller_email" class="block text-sm font-medium text-gray-700 mb-1">Email Address *</label>
+                            <input type="email" id="seller_email" name="email" required class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-navy">
+                        </div>
+                        <div>
+                            <label for="seller_message" class="block text-sm font-medium text-gray-700 mb-1">Message *</label>
+                            <textarea id="seller_message" name="message" rows="4" required placeholder="Describe your inquiry, quantity needed, delivery requirements, etc." class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-navy resize-none"></textarea>
+                        </div>
+                        <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+                        <div class="flex flex-col sm:flex-row gap-3 pt-4">
+                            <button type="submit" class="btn-primary flex-1">Send Message</button>
+                            <button type="button" id="cancelBtn" class="btn-secondary flex-1">Cancel</button>
+                        </div>
+                        <div id="seller_result" class="text-center text-medium-gray mt-2"></div>
+                    </form>
+                    <script>
+                    const contactSellerForm = document.getElementById('contactSellerForm');
+                    const sellerResult = document.getElementById('seller_result');
+                    contactSellerForm.addEventListener('submit', function(e) {
+                      e.preventDefault();
+                      const formData = new FormData(contactSellerForm);
+                      const object = Object.fromEntries(formData);
+                      const json = JSON.stringify(object);
+                      sellerResult.innerHTML = "Please wait..."
+                      fetch('https://api.web3forms.com/submit', {
+                              method: 'POST',
+                              headers: {
+                                  'Content-Type': 'application/json',
+                                  'Accept': 'application/json'
+                              },
+                              body: json
+                          })
+                          .then(async (response) => {
+                              let json = await response.json();
+                              if (response.status == 200) {
+                                  sellerResult.innerHTML = "Form submitted successfully";
+                              } else {
+                                  console.log(response);
+                                  sellerResult.innerHTML = json.message;
+                              }
+                          })
+                          .catch(error => {
+                              console.log(error);
+                              sellerResult.innerHTML = "Something went wrong!";
+                          })
+                          .then(function() {
+                              contactSellerForm.reset();
+                              setTimeout(() => {
+                                  sellerResult.style.display = "none";
+                              }, 3000);
+                          });
+                    });
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark-gray text-white py-8 mt-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-center text-gray-400 text-sm">
+                © 2025 ByProduct Bazaar. All rights reserved. | info@byproductbazaar.com
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Product data
+        const products = {
+            'chemical-waste-solvents': {
+                name: 'Chemical Waste - Solvents',
+                title: 'Chemical Waste - Solvents',
+                description: 'Industrial grade solvents, properly contained and documented. Suitable for recycling.',
+                price: '₹15,000/ton',
+                quantity: '2 tons',
+                location: 'Mumbai, Maharashtra',
+                category: 'Chemical',
+                condition: 'Good',
+                certification: 'Available',
+                sellerInitials: 'CW',
+                sellerName: 'Chem Waste Solutions',
+                similarProducts: [
+                    { name: 'Metal Scrap - Steel', link: 'metal-scrap-steel', price: '₹25,000/ton', location: 'Delhi, NCR' },
+                    { name: 'Plastic Waste - HDPE', link: 'plastic-waste-hdpe', price: '₹8,500/ton', location: 'Bangalore, Karnataka' },
+                    { name: 'Electronic Waste - PCBs', link: 'electronic-waste-pcbs', price: '₹12,000/ton', location: 'Chennai, Tamil Nadu' }
+                ]
+            },
+            'metal-scrap-steel': {
+                name: 'Metal Scrap - Steel',
+                title: 'Metal Scrap - Steel',
+                description: 'High-quality steel scrap, sorted and ready for recycling. Clean material.',
+                price: '₹25,000/ton',
+                quantity: '5 tons',
+                location: 'Delhi, NCR',
+                category: 'Metal',
+                condition: 'Excellent',
+                certification: 'Available',
+                sellerInitials: 'MS',
+                sellerName: 'Metal Scrap Co.',
+                similarProducts: [
+                    { name: 'Aluminum Scrap', link: 'aluminum-scrap', price: '₹35,000/ton', location: 'Pune, Maharashtra' },
+                    { name: 'Copper Wire', link: 'copper-wire', price: '₹180/kg', location: 'Mumbai, MH' },
+                    { name: 'Iron Scrap', link: 'iron-scrap', price: '₹15/kg', location: 'Chennai, TN' }
+                ]
+            },
+            'plastic-waste-hdpe': {
+                name: 'Plastic Waste - HDPE',
+                title: 'Plastic Waste - HDPE',
+                description: 'Clean HDPE plastic waste, suitable for recycling. Well-sorted material.',
+                price: '₹8,500/ton',
+                quantity: '3 tons',
+                location: 'Bangalore, Karnataka',
+                category: 'Plastic',
+                condition: 'Good',
+                certification: 'Available',
+                sellerInitials: 'PW',
+                sellerName: 'Plastic Waste Recyclers',
+                similarProducts: [
+                    { name: 'Chemical Waste - Solvents', link: 'chemical-waste-solvents', price: '₹15,000/ton', location: 'Mumbai, Maharashtra' },
+                    { name: 'Textile Waste - Cotton', link: 'textile-waste-cotton', price: '₹6,500/ton', location: 'Ahmedabad, Gujarat' },
+                    { name: 'Electronic Waste - PCBs', link: 'electronic-waste-pcbs', price: '₹12,000/ton', location: 'Chennai, Tamil Nadu' }
+                ]
+            },
+            'electronic-waste-pcbs': {
+                name: 'Electronic Waste - PCBs',
+                title: 'Electronic Waste - PCBs',
+                description: 'Printed circuit boards from electronic devices. Properly dismantled.',
+                price: '₹12,000/ton',
+                quantity: '1.5 tons',
+                location: 'Chennai, Tamil Nadu',
+                category: 'Electronic',
+                condition: 'Good',
+                certification: 'Available',
+                sellerInitials: 'EW',
+                sellerName: 'E-Waste Solutions',
+                similarProducts: [
+                    { name: 'Chemical Waste - Solvents', link: 'chemical-waste-solvents', price: '₹15,000/ton', location: 'Mumbai, Maharashtra' },
+                    { name: 'Plastic Waste - HDPE', link: 'plastic-waste-hdpe', price: '₹8,500/ton', location: 'Bangalore, Karnataka' },
+                    { name: 'Metal Scrap - Steel', link: 'metal-scrap-steel', price: '₹25,000/ton', location: 'Delhi, NCR' }
+                ]
+            },
+            'aluminum-scrap': {
+                name: 'Aluminum Scrap',
+                title: 'Aluminum Scrap',
+                description: 'Clean aluminum scrap, sorted by grade. High purity material.',
+                price: '₹35,000/ton',
+                quantity: '2 tons',
+                location: 'Pune, Maharashtra',
+                category: 'Metal',
+                condition: 'Excellent',
+                certification: 'Available',
+                sellerInitials: 'AS',
+                sellerName: 'Aluminum Traders',
+                similarProducts: [
+                    { name: 'Metal Scrap - Steel', link: 'metal-scrap-steel', price: '₹25,000/ton', location: 'Delhi, NCR' },
+                    { name: 'Copper Wire', link: 'copper-wire', price: '₹180/kg', location: 'Mumbai, MH' },
+                    { name: 'Iron Scrap', link: 'iron-scrap', price: '₹15/kg', location: 'Chennai, TN' }
+                ]
+            },
+            'textile-waste-cotton': {
+                name: 'Textile Waste - Cotton',
+                title: 'Textile Waste - Cotton',
+                description: 'Cotton textile waste from garment industry. Clean and sorted.',
+                price: '₹6,500/ton',
+                quantity: '4 tons',
+                location: 'Ahmedabad, Gujarat',
+                category: 'Textile',
+                condition: 'Good',
+                certification: 'Available',
+                sellerInitials: 'TW',
+                sellerName: 'Textile Waste Co.',
+                similarProducts: [
+                    { name: 'Plastic Waste - HDPE', link: 'plastic-waste-hdpe', price: '₹8,500/ton', location: 'Bangalore, Karnataka' },
+                    { name: 'Chemical Waste - Solvents', link: 'chemical-waste-solvents', price: '₹15,000/ton', location: 'Mumbai, Maharashtra' },
+                    { name: 'Electronic Waste - PCBs', link: 'electronic-waste-pcbs', price: '₹12,000/ton', location: 'Chennai, Tamil Nadu' }
+                ]
+            },
+            'copper-wire': {
+                name: 'Copper Wire',
+                title: 'Copper Wire',
+                description: 'Insulated copper wire scrap, high conductivity material.',
+                price: '₹180/kg',
+                quantity: '500 kg',
+                location: 'Mumbai, MH',
+                category: 'Metal',
+                condition: 'Good',
+                certification: 'Available',
+                sellerInitials: 'CW',
+                sellerName: 'Copper Wire Traders',
+                similarProducts: [
+                    { name: 'Aluminum Scrap', link: 'aluminum-scrap', price: '₹35,000/ton', location: 'Pune, Maharashtra' },
+                    { name: 'Metal Scrap - Steel', link: 'metal-scrap-steel', price: '₹25,000/ton', location: 'Delhi, NCR' },
+                    { name: 'Iron Scrap', link: 'iron-scrap', price: '₹15/kg', location: 'Chennai, TN' }
+                ]
+            },
+            'iron-scrap': {
+                name: 'Iron Scrap',
+                title: 'Iron Scrap',
+                description: 'Heavy iron scrap, ready for processing and recycling.',
+                price: '₹15/kg',
+                quantity: '10 tons',
+                location: 'Chennai, TN',
+                category: 'Metal',
+                condition: 'Good',
+                certification: 'Available',
+                sellerInitials: 'IS',
+                sellerName: 'Iron Scrap Traders',
+                similarProducts: [
+                    { name: 'Aluminum Scrap', link: 'aluminum-scrap', price: '₹35,000/ton', location: 'Pune, Maharashtra' },
+                    { name: 'Metal Scrap - Steel', link: 'metal-scrap-steel', price: '₹25,000/ton', location: 'Delhi, NCR' },
+                    { name: 'Copper Wire', link: 'copper-wire', price: '₹180/kg', location: 'Mumbai, MH' }
+                ]
+            }
+        };
+
+        // Function to get URL parameter
+        function getUrlParameter(name) {
+            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            var results = regex.exec(location.search);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        }
+
+        // Function to update product details
+        function updateProductDetails() {
+            const productId = getUrlParameter('product');
+            const product = products[productId] || products['metal-scrap-steel']; // Default to steel scrap
+
+            // Update page title
+            document.title = product.title + ' - ByProduct Bazaar';
+
+            // Update breadcrumb
+            document.getElementById('productName').textContent = product.name;
+
+            // Update product info
+            document.getElementById('productTitle').textContent = product.title;
+            document.getElementById('productDescription').textContent = product.description;
+            document.getElementById('productPrice').textContent = product.price;
+            document.getElementById('productQuantity').textContent = product.quantity;
+            document.getElementById('productLocation').textContent = product.location;
+            document.getElementById('productCategory').textContent = product.category;
+            document.getElementById('productCondition').textContent = product.condition;
+            document.getElementById('productCertification').textContent = product.certification;
+
+            // Update seller info
+            document.getElementById('sellerInitials').textContent = product.sellerInitials;
+            document.getElementById('sellerName').textContent = product.sellerName;
+
+            // Update similar products
+            const similarProductsContainer = document.getElementById('similarProducts');
+            similarProductsContainer.innerHTML = '';
+            
+            product.similarProducts.forEach(similar => {
+                const productCard = `
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                        <a href="product-details.html?product=${similar.link}" class="block">
+                            <div class="h-48 bg-gradient-to-br from-blue-400 to-blue-600"></div>
+                        </a>
+                        <div class="p-6">
+                            <h3 class="text-lg font-bold text-dark-gray mb-2">${similar.name}</h3>
+                            <p class="text-gray-600 mb-4">Related waste material</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-teal font-bold">${similar.price}</span>
+                                <span class="text-sm text-gray-500">${similar.location}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                similarProductsContainer.innerHTML += productCard;
+            });
+        }
+
+        // Mobile menu toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
+
+            mobileMenuBtn.addEventListener('click', function() {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // Update product details on page load
+            updateProductDetails();
+
+            // Product image mapping and dynamic update
+            (function() {
+                // Map product query param to local image path
+                const productImageMap = {
+                    'chemical-waste-solvents': 'https://www.actylislab.com/assets/images/chemicals/hplc-ar-dry-solvents.jpg',
+                    'metal-scrap-steel': 'https://shreemetalprices.com/wp-content/uploads/2025/01/Untitled-design-2.png',
+                    'plastic-waste-hdpe': 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlFTotf57dUBaKjmbVBlYRd8Qr64Sm25wGQQ&s',
+                    'electronic-waste-pcbs': 'https://images.jdmagicbox.com/quickquotes/images_main/e-waste-scrap-2217637879-0zkgm3rf.jpg',
+                    'aluminum-scrap': 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRwoHPfg389mem8y1S8wAdM3R5kClI-AZsrQ&s',
+                    'textile-waste-cotton': 'https://images.jdmagicbox.com/quickquotes/images_main/-zim6ygjh.jpg',
+                    'paper-waste-reels': 'https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=600&q=80',
+                    'glass-waste-bottles': 'https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=600&q=80',
+                    'wood-waste-pallets': 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=600&q=80',
+                    'organic-waste-compost': 'https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=600&q=80',
+                    'construction-debris': 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcToLh_Mu6J7AAPstLx6vyGCa6vHcEhgCuiF6A&s',
+                    'lead-battery-scrap': 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBNZ8_zFrkggEqZQrojzYYRoscXRxVDOj0lw&s',
+                    'oil-sludge': 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLwsFW8lnFtn1qD2k4PxDyZ1jvK6lL-NRbTg&s',
+                    'food-waste': 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOhExSX3Xmsv8l9b6pDpLz4UsHmSOW-5bpAQ&s',
+                    'pharma-waste': 'https://www.netsolwater.com/netsol-water/assets/img/product-images/The-Challenges-and-Solutions-of-Pharmaceutical-Waste-Disposal-in-STPs.jpg',
+                    'ash-flyash': 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNAVXr9HiWJc7bG3JX0SFTdgd08rdVk0BSLA&s',
+                    // Add more mappings as needed
+                };
+                function getProductFromQuery() {
+                    const params = new URLSearchParams(window.location.search);
+                    return params.get('product');
+                }
+                const productKey = getProductFromQuery();
+                const imgPath = productImageMap[productKey] || 'Images/placeholder.jpg';
+                const imgEl = document.getElementById('productMainImage');
+                if (imgEl) imgEl.src = imgPath;
+            })();
+
+            // Contact Modal Functionality
+            const contactBtn = document.getElementById('contactSellerBtn');
+            const contactModal = document.getElementById('contactModal');
+            const closeModal = document.getElementById('closeModal');
+            const cancelBtn = document.getElementById('cancelBtn');
+            const contactForm = document.getElementById('contactSellerForm'); // Changed to contactSellerForm
+
+            // Open modal
+            contactBtn.addEventListener('click', function() {
+                contactModal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden'; // Prevent background scrolling
+            });
+
+            // Close modal functions
+            function closeContactModal() {
+                contactModal.classList.add('hidden');
+                document.body.style.overflow = 'auto'; // Restore scrolling
+                contactForm.reset(); // Reset form
+            }
+
+            closeModal.addEventListener('click', closeContactModal);
+            cancelBtn.addEventListener('click', closeContactModal);
+
+            // Close modal when clicking outside
+            contactModal.addEventListener('click', function(e) {
+                if (e.target === contactModal) {
+                    closeContactModal();
+                }
+            });
+
+            // Close modal with Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && !contactModal.classList.contains('hidden')) {
+                    closeContactModal();
+                }
+            });
+        });
+    </script>
+</body>
+</html> 

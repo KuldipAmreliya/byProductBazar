@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ByProduct Bazaar - India's First Eco-Marketplace for Industrial Waste Trading</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'navy': '#1e3a8a',
+                        'teal': '#0f766e',
+                        'gold': '#d97706',
+                        'dark-gray': '#374151',
+                        'medium-gray': '#6b7280',
+                        'light-gray': '#f3f4f6'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #1e3a8a 0%, #0f766e 100%);
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        .btn-primary {
+            background: #1e3a8a;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            background: #1e40af;
+            transform: translateY(-2px);
+        }
+        .btn-secondary {
+            background: white;
+            color: #1e3a8a;
+            border: 2px solid #1e3a8a;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .btn-secondary:hover {
+            background: #1e3a8a;
+            color: white;
+        }
+        .btn-teal {
+            background: #0f766e;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .btn-teal:hover {
+            background: #115e59;
+            transform: translateY(-2px);
+        }
+        .btn-gold {
+            background: #d97706;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .btn-gold:hover {
+            background: #b45309;
+            transform: translateY(-2px);
+        }
+    </style>
+    <style>
+        /* Animation classes */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.4,0,0.2,1), transform 0.8s cubic-bezier(0.4,0,0.2,1);
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .slide-in-up {
+            opacity: 0;
+            transform: translateY(60px);
+            transition: opacity 1s cubic-bezier(0.4,0,0.2,1), transform 1s cubic-bezier(0.4,0,0.2,1);
+        }
+        .slide-in-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .zoom-in {
+            opacity: 0;
+            transform: scale(0.95);
+            transition: opacity 0.8s cubic-bezier(0.4,0,0.2,1), transform 0.8s cubic-bezier(0.4,0,0.2,1);
+        }
+        .zoom-in.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-800">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <div class="w-10 h-10 bg-teal rounded-lg flex items-center justify-center mr-3">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+                        </svg>
+                    </div>
+                    <span class="text-xl font-bold text-navy">ByProduct Bazaar</span>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#" class="text-gray-600 hover:text-navy transition-colors">Home</a>
+                    <a href="browse-waste.html" class="text-gray-600 hover:text-navy transition-colors">Browse Waste</a>
+                    <a href="sell-waste.html" class="text-gray-600 hover:text-navy transition-colors">Sell Waste</a>
+                    <a href="about.html" class="text-gray-600 hover:text-navy transition-colors">About</a>
+                    <a href="transport.html" class="text-gray-600 hover:text-navy transition-colors">Transport</a>
+                    <a href="contact.html" class="text-gray-600 hover:text-navy transition-colors">Contact Us</a>
+                    <a href="login.html" class="btn-primary">Login</a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button class="text-gray-600 hover:text-navy">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="gradient-bg text-white py-20 fade-in relative overflow-hidden" id="hero-section">
+        <video autoplay loop muted playsinline
+            class="absolute inset-0 w-full h-full object-cover z-0"
+            src="https://cdn.pixabay.com/video/2019/05/01/23232-333604632_tiny.mp4"></video>
+        <div class="absolute inset-0 bg-navy opacity-70 z-10"></div>
+        <div class="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6 slide-in-up" id="hero-headline">
+                India's First Eco-Marketplace for 
+                <span class="text-gold">Industrial Waste Trading</span>
+            </h1>
+            <p class="text-xl md:text-2xl mb-12 max-w-3xl mx-auto opacity-90 fade-in" id="hero-sub">
+                Connect with verified buyers and sellers. Transform waste into opportunity with our secure B2B platform.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center fade-in" id="hero-cta">
+                <a href="sell-waste.html" class="btn-secondary">Sell Waste</a>
+                <a href="browse-waste.html" class="btn-secondary">Browse Waste</a>
+            </div>
+        </div>
+    </section>
+       <!-- Chemical Waste Categories -->
+       <!-- <section class="py-16 bg-white fade-in">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-dark-gray mb-4">Popular Chemical Waste Categories</h2>
+            <p class="text-lg text-medium-gray max-w-2xl mx-auto">Browse the most traded chemical waste types on our platform</p>
+          </div>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div class="bg-light-gray rounded-xl p-6 card-hover text-center flex flex-col items-center">
+              <img src="https://cdn-icons-png.flaticon.com/512/2913/2913461.png" alt="Acids" class="w-14 h-14 mb-3"/>
+              <h3 class="font-bold text-navy mb-1">Acids</h3>
+              <span class="text-medium-gray text-sm">Sulphuric, Hydrochloric, Nitric...</span>
+            </div>
+            <div class="bg-light-gray rounded-xl p-6 card-hover text-center flex flex-col items-center">
+              <img src="https://cdn-icons-png.flaticon.com/512/2913/2913467.png" alt="Solvents" class="w-14 h-14 mb-3"/>
+              <h3 class="font-bold text-navy mb-1">Solvents</h3>
+              <span class="text-medium-gray text-sm">Toluene, Acetone, Xylene...</span>
+            </div>
+            <div class="bg-light-gray rounded-xl p-6 card-hover text-center flex flex-col items-center">
+              <img src="https://cdn-icons-png.flaticon.com/512/2913/2913465.png" alt="Industrial Chemicals" class="w-14 h-14 mb-3"/>
+              <h3 class="font-bold text-navy mb-1">Industrial Chemicals</h3>
+              <span class="text-medium-gray text-sm">Sodium Hydroxide, Ammonia...</span>
+            </div>
+            <div class="bg-light-gray rounded-xl p-6 card-hover text-center flex flex-col items-center">
+              <img src="https://cdn-icons-png.flaticon.com/512/2913/2913463.png" alt="Byproducts" class="w-14 h-14 mb-3"/>
+              <h3 class="font-bold text-navy mb-1">Byproducts</h3>
+              <span class="text-medium-gray text-sm">Spent Catalyst, Sludge...</span>
+            </div>
+          </div>
+        </div>
+      </section> -->
+  
+      
+    <!-- How It Works Section -->
+    <section class="py-20 bg-light-gray fade-in">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-dark-gray mb-4">How It Works</h2>
+                <p class="text-lg text-medium-gray max-w-2xl mx-auto">
+                    Simple 3-step process to trade industrial waste safely and efficiently
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Step 1: List -->
+                <div class="bg-white rounded-xl p-8 card-hover text-center zoom-in">
+                    <div class="w-16 h-16 bg-navy rounded-full flex items-center justify-center mx-auto mb-6">
+                        <span class="text-white text-2xl font-bold">1</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-dark-gray mb-4">List</h3>
+                    <p class="text-medium-gray">
+                        Create detailed listings for your industrial waste materials with specifications, quantities, and pricing.
+                    </p>
+                </div>
+
+                <!-- Step 2: Connect -->
+                <div class="bg-white rounded-xl p-8 card-hover text-center zoom-in">
+                    <div class="w-16 h-16 bg-teal rounded-full flex items-center justify-center mx-auto mb-6">
+                        <span class="text-white text-2xl font-bold">2</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-dark-gray mb-4">Connect</h3>
+                    <p class="text-medium-gray">
+                        Connect with verified buyers and sellers through our secure messaging and negotiation platform.
+                    </p>
+                </div>
+
+                <!-- Step 3: Transport -->
+                <div class="bg-white rounded-xl p-8 card-hover text-center zoom-in">
+                    <div class="w-16 h-16 bg-gold rounded-full flex items-center justify-center mx-auto mb-6">
+                        <span class="text-white text-2xl font-bold">3</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-dark-gray mb-4">Transport</h3>
+                    <p class="text-medium-gray">
+                        Arrange secure transportation and complete transactions with our escrow payment protection.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mock Payment Demo Section -->
+    <section class="py-16 bg-white fade-in">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="bg-gradient-to-r from-navy to-teal-700 rounded-2xl shadow-xl p-10 flex flex-col md:flex-row items-center gap-8">
+          <div class="flex-1 text-white">
+            <h2 class="text-3xl font-bold mb-2">Try Our Professional Payment Demo</h2>
+            <p class="text-lg mb-4 opacity-90">Experience a real, modern payment gateway interface—see how your customers will pay securely on ByProduct Bazaar.</p>
+            <a href="mock-payment.html" class="btn-gold text-lg font-semibold px-8 py-3 mt-2 inline-block shadow hover:bg-gold/90 transition">Go to Mock Payment</a>
+          </div>
+          <div class="flex-1 flex justify-center">
+            <img src="Images/sulphuric-acid-1000x1000.jpg" alt="Payment Demo" class="w-48 h-48 rounded-xl shadow-lg border-4 border-white object-cover"/>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="py-20 bg-white fade-in">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-dark-gray mb-4">Services We Offer</h2>
+                <p class="text-lg text-medium-gray max-w-2xl mx-auto">
+                    Comprehensive solutions to make your waste trading experience seamless
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Storage -->
+                <div class="bg-light-gray rounded-xl p-8 card-hover border-l-4 border-teal zoom-in">
+                    <div class="w-12 h-12 bg-teal rounded-lg flex items-center justify-center mb-6">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-dark-gray mb-4">Secure Storage</h3>
+                    <p class="text-medium-gray">
+                        Certified storage facilities with proper containment and monitoring for hazardous materials.
+                    </p>
+                </div>
+
+                <!-- Transport -->
+                <div class="bg-light-gray rounded-xl p-8 card-hover border-l-4 border-gold zoom-in">
+                    <div class="w-12 h-12 bg-gold rounded-lg flex items-center justify-center mb-6">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-dark-gray mb-4">Safe Transport</h3>
+                    <p class="text-medium-gray">
+                        Licensed carriers with real-time tracking and proper documentation for all shipments.
+                    </p>
+                </div>
+
+                <!-- Escrow Payment -->
+                <div class="bg-light-gray rounded-xl p-8 card-hover border-l-4 border-navy zoom-in">
+                    <div class="w-12 h-12 bg-navy rounded-lg flex items-center justify-center mb-6">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-dark-gray mb-4">Escrow Payment</h3>
+                    <p class="text-medium-gray">
+                        Secure payment protection ensuring safe transactions for all parties involved.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-20 bg-light-gray fade-in">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-dark-gray mb-4">Why Choose ByProduct Bazaar?</h2>
+                <p class="text-lg text-medium-gray max-w-2xl mx-auto">
+                    Trusted by thousands of businesses across India for safe and efficient waste trading
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Feature 1 -->
+                <div class="text-center zoom-in">
+                    <div class="w-16 h-16 bg-navy rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-dark-gray mb-2">Verified Users</h3>
+                    <p class="text-medium-gray">All buyers and sellers are thoroughly verified for your safety</p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="text-center zoom-in">
+                    <div class="w-16 h-16 bg-teal rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-dark-gray mb-2">Fast Transactions</h3>
+                    <p class="text-medium-gray">Complete deals quickly with our streamlined process</p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="text-center zoom-in">
+                    <div class="w-16 h-16 bg-gold rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-dark-gray mb-2">Secure Platform</h3>
+                    <p class="text-medium-gray">Bank-level security to protect your transactions</p>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="text-center zoom-in">
+                    <div class="w-16 h-16 bg-navy rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192L5.636 18.364M12 2.25a9.75 9.75 0 100 19.5 9.75 9.75 0 000-19.5z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-dark-gray mb-2">24/7 Support</h3>
+                    <p class="text-medium-gray">Round-the-clock customer support for all your needs</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-navy text-white fade-in">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">Ready to Start Trading?</h2>
+            <p class="text-xl mb-8 max-w-2xl mx-auto opacity-90">
+                Join thousands of businesses already using ByProduct Bazaar for their waste trading needs
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="register.html" class="btn-teal">Get Started</a>
+                <a href="about.html" class="btn-secondary">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark-gray text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-lg font-semibold mb-4 text-gold">ByProduct Bazaar</h3>
+                    <p class="text-gray-300">India's premier B2B marketplace for industrial waste trading.</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-3">Services</h4>
+                    <ul class="space-y-2 text-gray-300">
+                        <li><a href="#" class="hover:text-white transition-colors">Storage</a></li>
+                        <li><a href="transport.html" class="hover:text-white transition-colors">Transport</a></li>
+                        <li><a href="escrow.html" class="hover:text-white transition-colors">Escrow</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-3">Company</h4>
+                    <ul class="space-y-2 text-gray-300">
+                        <li><a href="about.html" class="hover:text-white transition-colors">About</a></li>
+                        <li><a href="contact.html" class="hover:text-white transition-colors">Contact</a></li>
+                        <li><a href="privacy.html" class="hover:text-white transition-colors">Privacy</a></li>
+                    </ul>
+                    </div>
+                <div>
+                    <h4 class="font-semibold mb-3">Connect</h4>
+                    <div class="flex space-x-4">
+                        <div class="w-10 h-10 bg-teal rounded-lg flex items-center justify-center">
+                            <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
+                            </svg>
+                        </div>
+                        <!-- <div class="w-10 h-10 bg-teal rounded-lg flex items-center justify-center">
+                            <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z"/>
+                            </svg>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-600 mt-8 pt-8 text-center text-gray-300">
+                <p>&copy; 2025 ByProduct Bazaar. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+
+
+    <script>
+        // Simple mobile menu toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuBtn = document.querySelector('button');
+            const mobileMenu = document.createElement('div');
+            mobileMenu.className = 'md:hidden bg-white shadow-lg absolute top-16 left-0 right-0 p-4';
+            mobileMenu.innerHTML = `
+                <div class="flex flex-col space-y-4">
+                    <a href="#" class="text-gray-600 hover:text-navy transition-colors">Home</a>
+                    <a href="browse-waste.html" class="text-gray-600 hover:text-navy transition-colors">Browse Waste</a>
+                    <a href="sell-waste.html" class="text-gray-600 hover:text-navy transition-colors">Sell Waste</a>
+                    <a href="about.html" class="text-gray-600 hover:text-navy transition-colors">About</a>
+                    <a href="transport.html" class="text-gray-600 hover:text-navy transition-colors">Transport</a>
+                    <a href="contact.html" class="text-gray-600 hover:text-navy transition-colors">Contact Us</a>
+                    <a href="login.html" class="btn-primary text-center">Login</a>
+                </div>
+            `;
+            mobileMenu.style.display = 'none';
+            document.querySelector('nav').appendChild(mobileMenu);
+
+            mobileMenuBtn.addEventListener('click', function() {
+                mobileMenu.style.display = mobileMenu.style.display === 'none' ? 'block' : 'none';
+            });
+        });
+    </script>
+    <script>
+        // Scroll-triggered animation for sections and cards
+        document.addEventListener('DOMContentLoaded', function() {
+            const fadeEls = document.querySelectorAll('.fade-in, .slide-in-up, .zoom-in');
+            const observer = new window.IntersectionObserver((entries, obs) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        obs.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.15 });
+            fadeEls.forEach(el => observer.observe(el));
+
+            // Hero entrance animation
+            setTimeout(() => {
+                document.getElementById('hero-headline').classList.add('visible');
+                document.getElementById('hero-sub').classList.add('visible');
+                document.getElementById('hero-cta').classList.add('visible');
+            }, 200);
+        });
+    </script>
+    <script type="text/javascript">
+        (function(d, m){
+            var kommunicateSettings = 
+                {"appId":"19ea3bbfb7adac7350cb606167cdd1755","popupWidget":true,"automaticChatOpenOnNavigation":true};
+            var s = document.createElement("script"); s.type = "text/javascript"; s.async = true;
+            s.src = "https://widget.kommunicate.io/v2/kommunicate.app";
+            var h = document.getElementsByTagName("head")[0]; h.appendChild(s);
+            window.kommunicate = m; m._globals = kommunicateSettings;
+        })(document, window.kommunicate || {});
+   
+    </script>
+</body>
+</html> 

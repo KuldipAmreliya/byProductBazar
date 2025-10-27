@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sell Waste - ByProduct Bazaar</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                fontFamily: {
+                    'sans': ['Inter', 'ui-sans-serif', 'system-ui'],
+                },
+                extend: {
+                    colors: {
+                        'navy': '#1e3a8a',
+                        'teal': '#0f766e',
+                        'gold': '#d97706',
+                        'dark-gray': '#374151',
+                        'medium-gray': '#6b7280',
+                        'light-gray': '#f3f4f6'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #1e3a8a 0%, #0f766e 100%);
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        .btn-primary {
+            background: #1e3a8a;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            background: #1e40af;
+            transform: translateY(-2px);
+        }
+        .btn-secondary {
+            background: white;
+            color: #1e3a8a;
+            border: 2px solid #1e3a8a;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .btn-secondary:hover {
+            background: #1e3a8a;
+            color: white;
+        }
+        .btn-teal {
+            background: #0f766e;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .btn-teal:hover {
+            background: #115e59;
+            transform: translateY(-2px);
+        }
+        .btn-gold {
+            background: #d97706;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .btn-gold:hover {
+            background: #b45309;
+            transform: translateY(-2px);
+        }
+        /* Animation keyframes */
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .animate-fadeInUp {
+            opacity: 0;
+            animation: fadeInUp 1s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+        }
+        .animated {
+            opacity: 1 !important;
+        }
+        /* Floating label styles */
+        .form-group {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+        .form-input, .form-textarea, .form-select {
+            width: 100%;
+            padding: 1.25rem 1rem 0.5rem 1rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            background: #fff;
+            font-size: 1rem;
+            transition: border 0.2s;
+        }
+        .form-input:focus, .form-textarea:focus, .form-select:focus {
+            border-color: #0f766e;
+            outline: none;
+        }
+        .form-label {
+            position: absolute;
+            left: 1rem;
+            top: 1.1rem;
+            background: #fff;
+            padding: 0 0.25rem;
+            color: #6b7280;
+            font-size: 1rem;
+            pointer-events: none;
+            transition: 0.2s;
+        }
+        .form-input:focus + .form-label,
+        .form-input:not(:placeholder-shown) + .form-label,
+        .form-textarea:focus + .form-label,
+        .form-textarea:not(:placeholder-shown) + .form-label,
+        .form-select:focus + .form-label,
+        .form-select:not([value=""]) + .form-label {
+            top: -0.7rem;
+            left: 0.75rem;
+            font-size: 0.85rem;
+            color: #0f766e;
+            background: #fff;
+        }
+        /* Drag and drop area */
+        .drop-area {
+            border: 2px dashed #0f766e;
+            border-radius: 0.75rem;
+            background: #f0fdfa;
+            padding: 2rem;
+            text-align: center;
+            transition: background 0.2s, border-color 0.2s;
+            cursor: pointer;
+        }
+        .drop-area.dragover {
+            background: #ccfbf1;
+            border-color: #1e3a8a;
+        }
+        .doc-card {
+            background: #fff;
+            border-radius: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .doc-icon {
+            width: 2.5rem;
+            height: 2.5rem;
+            background: #0f766e;
+            color: #fff;
+            border-radius: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+        .nav-link {
+            position: relative;
+            color: #374151;
+            font-weight: 500;
+            transition: color 0.2s;
+            padding-bottom: 2px;
+        }
+        .nav-link:hover {
+            color: #1e3a8a;
+        }
+        .nav-link::after {
+            content: '';
+            display: block;
+            width: 0;
+            height: 2px;
+            background: #0f766e;
+            transition: width 0.3s;
+            position: absolute;
+            left: 0;
+            bottom: -2px;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        .nav-link-active {
+            color: #1e3a8a;
+            font-weight: 700;
+            border-bottom: 2px solid #0f766e;
+            padding-bottom: 2px;
+        }
+    </style>
+</head>
+<body class="bg-light-gray text-dark-gray">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md sticky top-0 z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-14 md:h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <div class="w-10 h-10 bg-teal rounded-lg flex items-center justify-center mr-3 shadow-md">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+                        </svg>
+                    </div>
+                    <a href="index.html" class="text-xl font-bold text-navy tracking-tight">ByProduct Bazaar</a>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="browse-waste.html" class="nav-link">Browse Waste</a>
+                    <a href="sell-waste.html" class="nav-link-active">Sell Waste</a>
+                    <a href="about.html" class="nav-link">About</a>
+                    <a href="transport.html" class="nav-link">Transport</a>
+                    <a href="contact.html" class="nav-link">Contact Us</a>
+                    <a href="login.html" class="btn-primary ml-2">Login</a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button id="mobileMenuBtn" class="text-gray-600 hover:text-navy">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div id="mobileMenu" class="md:hidden hidden bg-white shadow-lg border-t border-gray-200">
+                <div class="flex flex-col space-y-4 p-4">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="browse-waste.html" class="nav-link">Browse Waste</a>
+                    <a href="sell-waste.html" class="nav-link-active">Sell Waste</a>
+                    <a href="about.html" class="nav-link">About</a>
+                    <a href="transport.html" class="nav-link">Transport</a>
+                    <a href="contact.html" class="nav-link">Contact Us</a>
+                    <a href="login.html" class="btn-primary text-center">Login</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative w-full min-h-[400px] flex items-center justify-center overflow-hidden">
+      <!-- Video Background -->
+      <video
+        class="absolute inset-0 w-full h-full object-cover z-0"
+        src="https://videos.pexels.com/video-files/3192259/3192259-uhd_2560_1440_25fps.mp4"
+        autoplay
+        loop
+        muted
+        playsinline
+      ></video>
+      <!-- Overlay for readability -->
+      <div class="absolute inset-0 bg-gradient-to-r from-blue-900/70 to-teal-700/70 z-10"></div>
+      <!-- Content Card -->
+      <div class="relative z-20 flex flex-col items-center justify-center w-full h-full py-16">
+        <div class="bg-white/80 rounded-2xl shadow-xl px-8 py-10 max-w-2xl mx-auto text-center backdrop-blur-md animate-fadeInUp">
+          <h1 class="text-5xl font-bold text-navy mb-4">Sell Your Industrial Waste</h1>
+          <p class="text-xl text-dark-gray mb-8 max-w-2xl mx-auto">
+            Turn your waste into profit. List your industrial waste materials and connect with verified buyers across India.
+          </p>
+          <div class="flex gap-4 justify-center">
+            <a href="sell-waste.html" class="px-8 py-3 bg-gold text-white font-bold rounded shadow-lg hover:bg-yellow-500 transition btn-gold">Start Selling</a>
+            <a href="browse-waste.html" class="px-8 py-3 bg-navy text-white font-semibold rounded shadow hover:bg-blue-900 transition">View Market</a>
+          </div>
+        </div>
+        <!-- Scroll Down Indicator -->
+        <div class="absolute bottom-6 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center">
+          <span class="text-white text-xs mb-1">Scroll Down</span>
+          <svg class="w-6 h-6 text-white animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-dark-gray mb-4">Why Sell on ByProduct Bazaar?</h2>
+                <p class="text-lg text-medium-gray max-w-2xl mx-auto">
+                    Join thousands of businesses already profiting from their waste materials
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="text-center animate-fadeInUp">
+                    <div class="w-16 h-16 bg-navy rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-dark-gray mb-2">Maximum Profit</h3>
+                    <p class="text-medium-gray">Get the best prices for your waste materials through competitive bidding</p>
+                </div>
+
+                <div class="text-center animate-fadeInUp">
+                    <div class="w-16 h-16 bg-teal rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-dark-gray mb-2">Secure Transactions</h3>
+                    <p class="text-medium-gray">Safe payment protection and verified buyers ensure secure deals</p>
+                </div>
+
+                <div class="text-center animate-fadeInUp">
+                    <div class="w-16 h-16 bg-gold rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-dark-gray mb-2">Quick Sales</h3>
+                    <p class="text-medium-gray">Fast listing process and quick connections with interested buyers</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sell Form Section -->
+    <section id="sell-form" class="py-16 bg-light-gray animate-fadeInUp relative" style="background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;">
+        <div class="absolute inset-0 bg-white/80 backdrop-blur-sm z-0"></div>
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div class="bg-white rounded-xl shadow-lg p-8">
+            <form 
+              id="sellForm" 
+              class="space-y-6" 
+              autocomplete="off" 
+              action="https://api.web3forms.com/submit" 
+              method="POST" 
+              enctype="multipart/form-data"
+            >
+              <!-- Web3Forms Integration -->
+              <input type="hidden" name="access_key" value="6bdb8625-efdc-4522-baa5-56cc8f0b396b" />
+              <input type="checkbox" name="botcheck" class="hidden" style="display: none;" />
+              <!-- <input type="hidden" name="redirect" value="https://yourdomain.com/thank-you.html"> -->
+      
+              <fieldset>
+                <legend class="text-center mb-8 animate-fadeInUp" id="sell-form-heading">
+                  <h2 class="text-3xl font-bold text-navy mb-2">List Your Waste Material</h2>
+                  <p class="text-medium-gray">Fill out the form below to start selling your industrial waste</p>
+                </legend>
+      
+                <!-- Your Original Fields (Untouched) -->
+                <!-- ... rest of the form stays exactly as you had it ... -->
+      
+                <div class="grid md:grid-cols-2 gap-6">
+                  <div>
+                    <label for="wasteType" class="block text-sm font-medium text-dark-gray mb-2">
+                      Waste Type *
+                    </label>
+                    <select 
+                      id="wasteType"
+                      name="wasteType" 
+                      required 
+                      class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-teal focus:ring-1 focus:ring-teal"
+                    >
+                      <option value="">Select waste type</option>
+                      <option value="chemical">Chemical Waste</option>
+                      <option value="metal">Metal Scrap</option>
+                      <option value="plastic">Plastic Waste</option>
+                      <option value="ewaste">Electronic Waste</option>
+                      <option value="textile">Textile Waste</option>
+                      <option value="paper">Paper Waste</option>
+                      <option value="other">Other</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label for="quantity" class="block text-sm font-medium text-dark-gray mb-2">
+                      Quantity *
+                    </label>
+                    <input 
+                      id="quantity"
+                      name="quantity" 
+                      type="number" 
+                      required 
+                      class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-teal focus:ring-1 focus:ring-teal"
+                      placeholder="Enter quantity"
+                    />
+                  </div>
+                </div>
+      
+                <div class="grid md:grid-cols-2 gap-6">
+                  <div>
+                    <label for="unit" class="block text-sm font-medium text-dark-gray mb-2">
+                      Unit *
+                    </label>
+                    <select 
+                      id="unit"
+                      name="unit" 
+                      required 
+                      class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-teal focus:ring-1 focus:ring-teal"
+                    >
+                      <option value="">Select unit</option>
+                      <option value="kg">Kilograms (kg)</option>
+                      <option value="ton">Tons</option>
+                      <option value="liters">Liters</option>
+                      <option value="pieces">Pieces</option>
+                      <option value="sqft">Square Feet</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label for="price" class="block text-sm font-medium text-dark-gray mb-2">
+                      Price per Unit (₹) *
+                    </label>
+                    <input 
+                      id="price"
+                      name="price" 
+                      type="number" 
+                      required 
+                      class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-teal focus:ring-1 focus:ring-teal"
+                      placeholder="Enter price per unit"
+                    />
+                  </div>
+                </div>
+      
+                <div>
+                  <label for="location" class="block text-sm font-medium text-dark-gray mb-2">
+                    Location *
+                  </label>
+                  <input 
+                    id="location"
+                    name="location" 
+                    type="text" 
+                    required 
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-teal focus:ring-1 focus:ring-teal"
+                    placeholder="City, State"
+                  />
+                </div>
+      
+                <div>
+                  <label for="description" class="block text-sm font-medium text-dark-gray mb-2">
+                    Description *
+                  </label>
+                  <textarea 
+                    id="description"
+                    name="description" 
+                    rows="4" 
+                    required 
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-teal focus:ring-1 focus:ring-teal"
+                    placeholder="Describe your waste material, condition, specifications, etc."
+                  ></textarea>
+                </div>
+      
+                <div>
+                  <label for="images" class="block text-sm font-medium text-dark-gray mb-2">
+                    Upload Images
+                  </label>
+                  <input 
+                    id="images"
+                    name="images" 
+                    type="file" 
+                    multiple 
+                    accept="image/*"
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-teal focus:ring-1 focus:ring-teal"
+                  />
+                  <p class="text-sm text-medium-gray mt-1">Upload up to 5 images (JPG, PNG). Max 5MB each.</p>
+                </div>
+      
+                <div>
+                  <label for="contactPhone" class="block text-sm font-medium text-dark-gray mb-2">
+                    Contact Phone *
+                  </label>
+                  <input 
+                    id="contactPhone"
+                    name="contactPhone" 
+                    type="tel" 
+                    required 
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-teal focus:ring-1 focus:ring-teal"
+                    placeholder="Enter your phone number"
+                  />
+                </div>
+      
+                <div>
+                  <label for="contactEmail" class="block text-sm font-medium text-dark-gray mb-2">
+                    Contact Email *
+                  </label>
+                  <input 
+                    id="contactEmail"
+                    name="contactEmail" 
+                    type="email" 
+                    required 
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-teal focus:ring-1 focus:ring-teal"
+                    placeholder="Enter your email"
+                  />
+                </div>
+      
+                <div class="flex items-center">
+                  <input 
+                    id="terms" 
+                    name="terms" 
+                    type="checkbox" 
+                    required
+                    class="h-4 w-4 text-teal focus:ring-teal border-gray-300 rounded"
+                  />
+                  <label for="terms" class="ml-2 block text-sm text-dark-gray">
+                    I agree to the <a href="terms.html" class="text-teal hover:text-teal-700">Terms of Service</a> and <a href="privacy.html" class="text-teal hover:text-teal-700">Privacy Policy</a>
+                  </label>
+                </div>
+      
+                <div class="flex gap-4">
+                  <button type="submit" class="btn-teal flex-1 py-3 text-lg">
+                    List My Waste
+                  </button>
+                  <button type="button" class="btn-secondary py-3 text-lg">
+                    Save Draft
+                  </button>
+                </div>
+              </fieldset>
+            </form>
+          </div>
+        </div>
+      </section>
+      
+
+    <section class="py-16 bg-light-gray">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <form id="document-upload-form" class="bg-white rounded-xl shadow-lg p-8 animate-fadeInUp w-full max-w-2xl mx-auto" autocomplete="off">
+              <fieldset>
+                <legend class="text-center mb-8 animate-fadeInUp">
+                  <h2 class="text-3xl font-bold text-navy mb-2">Upload Required Documents</h2>
+                  <p class="text-medium-gray">Please upload the following documents to complete your profile and enable full functionality.</p>
+                </legend>
+                    <div class="space-y-6">
+                        <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-6 animate-fadeInUp">
+                            <label class="md:w-1/2 font-medium text-dark-gray">1. Waste Dataset <span class="text-red-500">*</span><span class="ml-2 text-green-600 font-medium">[PDF]</span></label>
+                            <div class="md:w-1/2 flex flex-col gap-1">
+                                <input type="file" name="wasteDataset" accept=".pdf" required class="block w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-teal-50 file:text-teal-700 hover:file:bg-teal-100 border border-gray-300 rounded-lg focus:outline-none focus:border-teal focus:ring-1 focus:ring-teal" />
+                                <span class="text-red-500 text-xs mt-1 hidden"></span>
+                            </div>
+                        </div>
+                        <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-6 animate-fadeInUp">
+                            <label class="md:w-1/2 font-medium text-dark-gray">2. Proprietorship Document / Partnership Deed / Memorandum & Articles of Association <span class="text-red-500">*</span><span class="ml-2 text-green-600 font-medium">[PDF]</span></label>
+                            <div class="md:w-1/2 flex flex-col gap-1">
+                                <input type="file" name="proprietorshipDocument" accept=".pdf" required class="block w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-teal-50 file:text-teal-700 hover:file:bg-teal-100 border border-gray-300 rounded-lg focus:outline-none focus:border-teal focus:ring-1 focus:ring-teal" />
+                                <span class="text-red-500 text-xs mt-1 hidden"></span>
+                            </div>
+                        </div>
+                        <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-6 animate-fadeInUp">
+                            <label class="md:w-1/2 font-medium text-dark-gray">3. Certificate of Company Registration / Factory License <span class="text-red-500">*</span><span class="ml-2 text-green-600 font-medium">[PDF]</span></label>
+                            <div class="md:w-1/2 flex flex-col gap-1">
+                                <input type="file" name="companyRegistration" accept=".pdf" required class="block w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-teal-50 file:text-teal-700 hover:file:bg-teal-100 border border-gray-300 rounded-lg focus:outline-none focus:border-teal focus:ring-1 focus:ring-teal" />
+                                <span class="text-red-500 text-xs mt-1 hidden"></span>
+                            </div>
+                        </div>
+                        <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-6 animate-fadeInUp">
+                            <label class="md:w-1/2 font-medium text-dark-gray">4. SSI / MSI / LSI Certificate <span class="text-red-500">*</span><span class="ml-2 text-green-600 font-medium">[PDF]</span></label>
+                            <div class="md:w-1/2 flex flex-col gap-1">
+                                <input type="file" name="ssiCertificate" accept=".pdf" required class="block w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-teal-50 file:text-teal-700 hover:file:bg-teal-100 border border-gray-300 rounded-lg focus:outline-none focus:border-teal focus:ring-1 focus:ring-teal" />
+                                <span class="text-red-500 text-xs mt-1 hidden"></span>
+                            </div>
+                        </div>
+                        <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-6 animate-fadeInUp">
+                            <label class="md:w-1/2 font-medium text-dark-gray">5. Resolution Letter <span class="text-red-500">*</span><span class="ml-2 text-green-600 font-medium">[PDF]</span></label>
+                            <div class="md:w-1/2 flex flex-col gap-1">
+                                <input type="file" name="resolutionLetter" accept=".pdf" required class="block w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-teal-50 file:text-teal-700 hover:file:bg-teal-100 border border-gray-300 rounded-lg focus:outline-none focus:border-teal focus:ring-1 focus:ring-teal" />
+                                <span class="text-red-500 text-xs mt-1 hidden"></span>
+                            </div>
+                        </div>
+                        <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-6 animate-fadeInUp">
+                            <label class="md:w-1/2 font-medium text-dark-gray">6. Copy of PAN Card <span class="text-red-500">*</span><span class="ml-2 text-green-600 font-medium">[PDF / CPG]</span></label>
+                            <div class="md:w-1/2 flex flex-col gap-1">
+                                <input type="file" name="panCard" accept=".pdf,.cpg" required class="block w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-teal-50 file:text-teal-700 hover:file:bg-teal-100 border border-gray-300 rounded-lg focus:outline-none focus:border-teal focus:ring-1 focus:ring-teal" />
+                                <span class="text-red-500 text-xs mt-1 hidden"></span>
+                            </div>
+                        </div>
+                        <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-6 animate-fadeInUp">
+                            <label class="md:w-1/2 font-medium text-dark-gray">7. Copy of PCC Authorisation / Applied for Authorisation / Applied for Renewal <span class="text-red-500">*</span><span class="ml-2 text-green-600 font-medium">[PDF]</span></label>
+                            <div class="md:w-1/2 flex flex-col gap-1">
+                                <input type="file" name="pccAuthorisation" accept=".pdf" required class="block w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-teal-50 file:text-teal-700 hover:file:bg-teal-100 border border-gray-300 rounded-lg focus:outline-none focus:border-teal focus:ring-1 focus:ring-teal" />
+                                <span class="text-red-500 text-xs mt-1 hidden"></span>
+                            </div>
+                        </div>
+                        <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-6 animate-fadeInUp">
+                            <label class="md:w-1/2 font-medium text-dark-gray">8. Direct list with name & address <span class="text-red-500">*</span><span class="ml-2 text-green-600 font-medium">[PDF]</span></label>
+                            <div class="md:w-1/2 flex flex-col gap-1">
+                                <input type="file" name="directList" accept=".pdf" required class="block w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-teal-50 file:text-teal-700 hover:file:bg-teal-100 border border-gray-300 rounded-lg focus:outline-none focus:border-teal focus:ring-1 focus:ring-teal" />
+                                <span class="text-red-500 text-xs mt-1 hidden"></span>
+                            </div>
+                        </div>
+                        <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-6 animate-fadeInUp">
+                            <label class="md:w-1/2 font-medium text-dark-gray">9. Commercial / Contact number <span class="text-red-500">*</span><span class="ml-2 text-green-600 font-medium">[PDF]</span></label>
+                            <div class="md:w-1/2 flex flex-col gap-1">
+                                <input type="file" name="contactNumber" accept=".pdf" required class="block w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-teal-50 file:text-teal-700 hover:file:bg-teal-100 border border-gray-300 rounded-lg focus:outline-none focus:border-teal focus:ring-1 focus:ring-teal" />
+                                <span class="text-red-500 text-xs mt-1 hidden"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex gap-4 mt-8">
+                        <button type="reset" class="flex-1 py-4 bg-gray-200 hover:bg-gray-300 text-dark-gray font-bold rounded-lg text-xl transition-colors shadow">Reset</button>
+                        <button type="submit" class="flex-1 py-4 bg-teal-600 hover:bg-teal-700 text-black font-bold rounded-lg text-xl transition-colors shadow">Submit</button>
+                    </div>
+                  </fieldset>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark-gray text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-lg font-semibold mb-4 text-gold">ByProduct Bazaar</h3>
+                    <p class="text-gray-300">India's premier B2B marketplace for industrial waste trading.</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-3">Services</h4>
+                    <ul class="space-y-2 text-gray-300">
+                        <li><a href="#" class="hover:text-white transition-colors">Storage</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Transport</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Escrow</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-3">Company</h4>
+                    <ul class="space-y-2 text-gray-300">
+                        <li><a href="about.html" class="hover:text-white transition-colors">About</a></li>
+                        <li><a href="contact.html" class="hover:text-white transition-colors">Contact</a></li>
+                        <li><a href="privacy.html" class="hover:text-white transition-colors">Privacy</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-3">Connect</h4>
+                    <div class="flex space-x-4">
+                        <div class="w-10 h-10 bg-teal rounded-lg flex items-center justify-center">
+                            <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
+                            </svg>
+                        </div>
+                        <div class="w-10 h-10 bg-teal rounded-lg flex items-center justify-center">
+                            <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-600 mt-8 pt-8 text-center text-gray-300">
+                <p>&copy; 2025 ByProduct Bazaar. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Form submission
+        document.getElementById('sellForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Basic validation
+            const requiredFields = ['wasteType', 'quantity', 'unit', 'price', 'location', 'description', 'contactPhone', 'contactEmail'];
+            let isValid = true;
+            
+            requiredFields.forEach(field => {
+                const element = document.getElementById(field);
+                if (!element.value.trim()) {
+                    isValid = false;
+                    element.classList.add('border-red-500');
+                } else {
+                    element.classList.remove('border-red-500');
+                }
+            });
+            
+            if (!isValid) {
+                alert('Please fill in all required fields');
+                return;
+            }
+            
+            // Simulate form submission
+            alert('Your waste listing has been submitted successfully! We will review and publish it within 24 hours.');
+            this.reset();
+        });
+
+        // Document upload form submission
+        document.getElementById('document-upload-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // You can add validation here if needed
+            alert('Your documents have been submitted successfully! We will review and update your profile within 24 hours.');
+            this.reset();
+        });
+
+        // Animation on scroll for all elements with animate-fadeInUp
+        document.addEventListener('DOMContentLoaded', function() {
+            const animatedElements = document.querySelectorAll('.animate-fadeInUp');
+            const observerOptions = {
+                threshold: 0.2
+            };
+            const animateOnScroll = (entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animated');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            };
+            const observer = new IntersectionObserver(animateOnScroll, observerOptions);
+            animatedElements.forEach(el => observer.observe(el));
+        });
+    </script>
+    <script type="text/javascript">
+        (function(d, m){
+            var kommunicateSettings = 
+                {"appId":"19ea3bbfb7adac7350cb606167cdd1755","popupWidget":true,"automaticChatOpenOnNavigation":true};
+            var s = document.createElement("script"); s.type = "text/javascript"; s.async = true;
+            s.src = "https://widget.kommunicate.io/v2/kommunicate.app";
+            var h = document.getElementsByTagName("head")[0]; h.appendChild(s);
+            window.kommunicate = m; m._globals = kommunicateSettings;
+        })(document, window.kommunicate || {});
+    /* NOTE : Use web server to view HTML files as real-time update will not work if you directly open the HTML file in the browser. */
+    </script>
+</body>
+</html> 

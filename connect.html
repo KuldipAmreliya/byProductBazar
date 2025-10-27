@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connect - ByProduct Bazaar</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'navy': '#1e3a8a',
+                        'teal': '#0f766e',
+                        'gold': '#d97706',
+                        'dark-gray': '#374151',
+                        'medium-gray': '#6b7280',
+                        'light-gray': '#f3f4f6'
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="styles.css">
+    <script src="main.js" defer></script>
+</head>
+<body class="connect-bg">
+    <!-- Navigation -->
+    <nav class="bg-navy text-white shadow-lg">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <a href="index.html" class="text-xl font-bold">ByProduct Bazaar</a>
+                <div class="space-x-4">
+                    <a href="index.html" class="hover:text-teal">Home</a>
+                    <a href="browse-materials.html" class="hover:text-teal">Buy</a>
+                    <a href="start-selling.html" class="hover:text-teal">Sell</a>
+                    <a href="about.html" class="hover:text-teal">About</a>
+                    <a href="login.html" class="hover:text-teal">Login</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Connect Section -->
+    <div class="container mx-auto px-4 py-12">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-12">
+                <h1 class="text-4xl font-bold mb-4 animate-slide-up">Connect with Industry Partners</h1>
+                <p class="text-xl text-medium-gray animate-slide-up" style="animation-delay: 0.2s">Find the right buyers or sellers for your waste management needs</p>
+            </div>
+
+            <!-- Search and Filter -->
+            <div class="bg-white rounded-lg shadow-md p-8 mb-8 animate-slide-up" style="animation-delay: 0.4s">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-medium text-dark-gray mb-2">Industry Type</label>
+                        <select class="form-input">
+                            <option>All Industries</option>
+                            <option>Chemical Manufacturing</option>
+                            <option>Pharmaceutical</option>
+                            <option>Electronics</option>
+                            <option>Metal Processing</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-dark-gray mb-2">Location</label>
+                        <input type="text" class="form-input" placeholder="Enter city or region">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Company Listings -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Company Card -->
+                <div class="bg-white rounded-lg shadow-md p-6 hover-lift hover-glow animate-slide-up" style="animation-delay: 0.6s">
+                    <div class="flex items-center mb-4">
+                        <img src="https://via.placeholder.com/60" alt="Company Logo" class="w-12 h-12 rounded-full">
+                        <div class="ml-4">
+                            <h3 class="font-bold text-lg">ChemCorp Industries</h3>
+                            <p class="text-medium-gray">Chemical Manufacturing</p>
+                        </div>
+                    </div>
+                    <p class="text-medium-gray mb-4">Specializing in chemical waste processing and recycling. ISO 9001 certified.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm text-gray-500">Chicago, IL</span>
+                        <button class="btn-primary">Connect</button>
+                    </div>
+                </div>
+
+                <!-- Add more company cards here -->
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

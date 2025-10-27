@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sell Waste - ByProduct Bazaar</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'navy': '#1e3a8a',
+                        'teal': '#0f766e',
+                        'gold': '#d97706',
+                        'dark-gray': '#374151',
+                        'medium-gray': '#6b7280',
+                        'light-gray': '#f3f4f6'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+        .sell-bg {
+            background-image: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)),
+                             url('https://images.unsplash.com/photo-1579547621869-0231eb5eed47?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+    </style>
+</head>
+<body class="sell-bg">
+    <!-- Navigation -->
+    <nav class="bg-navy text-white shadow-lg">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <a href="index.html" class="text-xl font-bold">ByProduct Bazaar</a>
+                <div class="space-x-4">
+                    <a href="index.html" class="hover:text-teal">Home</a>
+                    <a href="#" class="hover:text-teal">Buy</a>
+                    <a href="login.html" class="hover:text-teal">Login</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sell Form -->
+    <div class="container mx-auto px-4 py-12">
+        <div class="max-w-2xl mx-auto bg-white rounded-lg shadow-md p-8 animate-fade-in">
+            <h1 class="text-3xl font-bold mb-8">List Your Chemical Waste</h1>
+            
+            <form class="space-y-6">
+                <div>
+                    <label class="block text-sm font-medium text-dark-gray mb-2">
+                        Chemical Type
+                    </label>
+                    <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal" 
+                           placeholder="e.g., Sulfuric Acid">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-dark-gray mb-2">
+                        Concentration/Purity
+                    </label>
+                    <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal" 
+                           placeholder="e.g., 98%">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-dark-gray mb-2">
+                        Quantity Available
+                    </label>
+                    <div class="flex space-x-4">
+                        <input type="number" class="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal" 
+                               placeholder="Amount">
+                        <select class="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal">
+                            <option>Liters</option>
+                            <option>Kilograms</option>
+                            <option>Tons</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-dark-gray mb-2">
+                        Price
+                    </label>
+                    <div class="flex items-center">
+                        <span class="text-gray-500 mr-2">$</span>
+                        <input type="number" class="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal" 
+                               placeholder="Price">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-dark-gray mb-2">
+                        Detailed Description
+                    </label>
+                    <textarea rows="4" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal"
+                              placeholder="Provide detailed information about the chemical waste..."></textarea>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-dark-gray mb-2">
+                        Safety Data Sheet (SDS)
+                    </label>
+                    <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+                        <div class="space-y-1 text-center">
+                            <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48">
+                                <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" 
+                                      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                            <div class="flex text-sm text-gray-600">
+                                <label for="file-upload" class="relative cursor-pointer bg-white rounded-md font-medium text-teal hover:text-teal-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-teal">
+                                    <span>Upload a file</span>
+                                    <input id="file-upload" name="file-upload" type="file" class="sr-only">
+                                </label>
+                                <p class="pl-1">or drag and drop</p>
+                            </div>
+                            <p class="text-xs text-gray-500">PDF up to 10MB</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex justify-end space-x-4">
+                    <button type="button" class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50">
+                        Save Draft
+                    </button>
+                    <button type="submit" class="px-4 py-2 bg-teal text-white rounded-md hover:bg-teal-700">
+                        List for Sale
+                    </button>
+                </div>
+            </form>
+
+            <div class="mt-10">
+                <h2 class="text-2xl font-bold text-navy mb-6 text-center">Upload Required Documents</h2>
+                <form id="document-upload-form" class="w-full max-w-2xl mx-auto bg-white rounded-xl shadow-lg p-6 md:p-10 space-y-6">
+                    <div class="space-y-6">
+                        <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-6">
+                            <label class="md:w-1/2 font-medium text-dark-gray">1. Waste Dataset <span class="text-red-500">*</span><span class="ml-2 text-green-600 font-medium">[PDF]</span></label>
+                            <div class="md:w-1/2 flex flex-col gap-1">
+                                <input type="file" name="wasteDataset" accept=".pdf" required class="block w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-teal-50 file:text-teal-700 hover:file:bg-teal-100 border border-gray-300 rounded-lg focus:outline-none focus:border-teal focus:ring-1 focus:ring-teal" />
+                                <span class="text-red-500 text-xs mt-1 hidden"></span>
+                            </div>
+                        </div>
+                        <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-6">
+                            <label class="md:w-1/2 font-medium text-dark-gray">2. Proprietorship Document / Partnership Deed / Memorandum & Articles of Association <span class="text-red-500">*</span><span class="ml-2 text-green-600 font-medium">[PDF]</span></label>
+                            <div class="md:w-1/2 flex flex-col gap-1">
+                                <input type="file" name="proprietorshipDocument" accept=".pdf" required class="block w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-teal-50 file:text-teal-700 hover:file:bg-teal-100 border border-gray-300 rounded-lg focus:outline-none focus:border-teal focus:ring-1 focus:ring-teal" />
+                                <span class="text-red-500 text-xs mt-1 hidden"></span>
+                            </div>
+                        </div>
+                        <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-6">
+                            <label class="md:w-1/2 font-medium text-dark-gray">3. Certificate of Company Registration / Factory License <span class="text-red-500">*</span><span class="ml-2 text-green-600 font-medium">[PDF]</span></label>
+                            <div class="md:w-1/2 flex flex-col gap-1">
+                                <input type="file" name="companyRegistration" accept=".pdf" required class="block w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-teal-50 file:text-teal-700 hover:file:bg-teal-100 border border-gray-300 rounded-lg focus:outline-none focus:border-teal focus:ring-1 focus:ring-teal" />
+                                <span class="text-red-500 text-xs mt-1 hidden"></span>
+                            </div>
+                        </div>
+                        <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-6">
+                            <label class="md:w-1/2 font-medium text-dark-gray">4. SSI / MSI / LSI Certificate <span class="text-red-500">*</span><span class="ml-2 text-green-600 font-medium">[PDF]</span></label>
+                            <div class="md:w-1/2 flex flex-col gap-1">
+                                <input type="file" name="ssiCertificate" accept=".pdf" required class="block w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-teal-50 file:text-teal-700 hover:file:bg-teal-100 border border-gray-300 rounded-lg focus:outline-none focus:border-teal focus:ring-1 focus:ring-teal" />
+                                <span class="text-red-500 text-xs mt-1 hidden"></span>
+                            </div>
+                        </div>
+                        <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-6">
+                            <label class="md:w-1/2 font-medium text-dark-gray">5. Resolution Letter <span class="text-red-500">*</span><span class="ml-2 text-green-600 font-medium">[PDF]</span></label>
+                            <div class="md:w-1/2 flex flex-col gap-1">
+                                <input type="file" name="resolutionLetter" accept=".pdf" required class="block w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-teal-50 file:text-teal-700 hover:file:bg-teal-100 border border-gray-300 rounded-lg focus:outline-none focus:border-teal focus:ring-1 focus:ring-teal" />
+                                <span class="text-red-500 text-xs mt-1 hidden"></span>
+                            </div>
+                        </div>
+                        <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-6">
+                            <label class="md:w-1/2 font-medium text-dark-gray">6. Copy of PAN Card <span class="text-red-500">*</span><span class="ml-2 text-green-600 font-medium">[PDF / CPG]</span></label>
+                            <div class="md:w-1/2 flex flex-col gap-1">
+                                <input type="file" name="panCard" accept=".pdf,.cpg" required class="block w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-teal-50 file:text-teal-700 hover:file:bg-teal-100 border border-gray-300 rounded-lg focus:outline-none focus:border-teal focus:ring-1 focus:ring-teal" />
+                                <span class="text-red-500 text-xs mt-1 hidden"></span>
+                            </div>
+                        </div>
+                        <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-6">
+                            <label class="md:w-1/2 font-medium text-dark-gray">7. Copy of PCC Authorisation / Applied for Authorisation / Applied for Renewal <span class="text-red-500">*</span><span class="ml-2 text-green-600 font-medium">[PDF]</span></label>
+                            <div class="md:w-1/2 flex flex-col gap-1">
+                                <input type="file" name="pccAuthorisation" accept=".pdf" required class="block w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-teal-50 file:text-teal-700 hover:file:bg-teal-100 border border-gray-300 rounded-lg focus:outline-none focus:border-teal focus:ring-1 focus:ring-teal" />
+                                <span class="text-red-500 text-xs mt-1 hidden"></span>
+                            </div>
+                        </div>
+                        <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-6">
+                            <label class="md:w-1/2 font-medium text-dark-gray">8. Direct list with name & address <span class="text-red-500">*</span><span class="ml-2 text-green-600 font-medium">[PDF]</span></label>
+                            <div class="md:w-1/2 flex flex-col gap-1">
+                                <input type="file" name="directList" accept=".pdf" required class="block w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-teal-50 file:text-teal-700 hover:file:bg-teal-100 border border-gray-300 rounded-lg focus:outline-none focus:border-teal focus:ring-1 focus:ring-teal" />
+                                <span class="text-red-500 text-xs mt-1 hidden"></span>
+                            </div>
+                        </div>
+                        <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-6">
+                            <label class="md:w-1/2 font-medium text-dark-gray">9. Commercial / Contact number <span class="text-red-500">*</span><span class="ml-2 text-green-600 font-medium">[PDF]</span></label>
+                            <div class="md:w-1/2 flex flex-col gap-1">
+                                <input type="file" name="contactNumber" accept=".pdf" required class="block w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-teal-50 file:text-teal-700 hover:file:bg-teal-100 border border-gray-300 rounded-lg focus:outline-none focus:border-teal focus:ring-1 focus:ring-teal" />
+                                <span class="text-red-500 text-xs mt-1 hidden"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="w-full py-3 mt-4 bg-teal-600 hover:bg-teal-700 text-white font-bold rounded-lg text-lg transition-colors">Submit Documents</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

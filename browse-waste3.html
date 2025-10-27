@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse Industrial Waste - Page 3</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'navy': '#1e3a8a',
+                        'teal': '#0f766e',
+                        'gold': '#d97706',
+                        'dark-gray': '#374151',
+                        'medium-gray': '#6b7280',
+                        'light-gray': '#f3f4f6'
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-light-gray text-dark-gray">
+    <!-- Navigation (same as browse-waste.html) -->
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <div class="w-10 h-10 bg-teal rounded-lg flex items-center justify-center mr-3">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+                        </svg>
+                    </div>
+                    <a href="index.html" class="text-xl font-bold text-navy">ByProduct Bazaar</a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-gray-600 hover:text-navy transition-colors">Home</a>
+                    <a href="browse-waste.html" class="text-navy font-semibold">Browse Waste</a>
+                    <a href="sell-waste.html" class="text-gray-600 hover:text-navy transition-colors">Sell Waste</a>
+                    <a href="about.html" class="text-gray-600 hover:text-navy transition-colors">About</a>
+                    <a href="login.html" class="btn-primary">Login</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobileMenuBtn" class="text-gray-600 hover:text-navy">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div id="mobileMenu" class="md:hidden hidden bg-white shadow-lg border-t border-gray-200">
+                <div class="flex flex-col space-y-4 p-4">
+                    <a href="index.html" class="text-gray-600 hover:text-navy transition-colors">Home</a>
+                    <a href="browse-waste.html" class="text-navy font-semibold">Browse Waste</a>
+                    <a href="sell-waste.html" class="text-gray-600 hover:text-navy transition-colors">Sell Waste</a>
+                    <a href="about.html" class="text-gray-600 hover:text-navy transition-colors">About</a>
+                    <a href="login.html" class="btn-primary text-center">Login</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- Hero Section -->
+    <section class="gradient-bg text-white py-16 relative overflow-hidden">
+        <video autoplay loop muted playsinline
+            class="absolute inset-0 w-full h-full object-cover z-0"
+            src="https://cdn.pixabay.com/video/2024/07/25/223170_tiny.mp4"></video>
+        <div class="absolute inset-0 bg-navy opacity-70 z-10"></div>
+        <div class="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h1 class="text-4xl md:text-5xl font-bold mb-6">Browse Industrial Waste</h1>
+                <p class="text-xl mb-8 max-w-3xl mx-auto opacity-90">
+                    Discover verified waste materials from trusted sellers across India. Find the perfect match for your recycling needs.
+                </p>
+                <!-- Search Bar -->
+                <div class="max-w-2xl mx-auto">
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <input 
+                            type="text" 
+                            id="searchInput"
+                            placeholder="Search for waste materials..." 
+                            class="flex-1 px-6 py-4 rounded-lg text-dark-gray focus:outline-none focus:ring-2 focus:ring-teal"
+                        />
+                        <button id="searchBtn" class="btn-teal px-8 py-4">Search</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Filters Section -->
+    <section class="py-8 bg-white border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-wrap items-center gap-4">
+                <span class="text-dark-gray font-medium">Filter by:</span>
+                <select class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-teal">
+                    <option>Category</option>
+                    <option>Chemical Waste</option>
+                    <option>Metal Scrap</option>
+                    <option>Plastic Waste</option>
+                    <option>Electronic Waste</option>
+                </select>
+                <select class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-teal">
+                    <option>Location</option>
+                    <option>Mumbai</option>
+                    <option>Delhi</option>
+                    <option>Bangalore</option>
+                    <option>Chennai</option>
+                </select>
+                <select class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-teal">
+                    <option>Price Range</option>
+                    <option>₹0 - ₹10,000</option>
+                    <option>₹10,000 - ₹50,000</option>
+                    <option>₹50,000+</option>
+                </select>
+                <button class="btn-secondary">Clear Filters</button>
+            </div>
+        </div>
+    </section>
+    <!-- Listings Section -->
+    <section class="py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center mb-8">
+                <h2 class="text-2xl font-bold text-dark-gray">Available Waste Materials</h2>
+                <div class="flex items-center space-x-4">
+                    <span class="text-medium-gray">Sort by:</span>
+                    <select class="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-teal">
+                        <option>Latest</option>
+                        <option>Price: Low to High</option>
+                        <option>Price: High to Low</option>
+                        <option>Distance</option>
+                    </select>
+                </div>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="productsGrid">
+                <!-- Listing 1 - Lead Battery Scrap -->
+                <div class="bg-white rounded-xl overflow-hidden card-hover shadow-lg product-card">
+                    <a href="product-details.html?product=lead-battery-scrap" class="block">
+                        <div class="h-48 relative cursor-pointer flex items-center justify-center overflow-hidden">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBNZ8_zFrkggEqZQrojzYYRoscXRxVDOj0lw&s" alt="Lead Battery Scrap" class="w-full h-full object-cover" />
+                            <div class="absolute top-4 right-4 bg-white px-2 py-1 rounded text-sm font-medium text-navy">Verified</div>
+                        </div>
+                    </a>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-2">
+                            <a href="product-details.html?product=lead-battery-scrap" class="text-lg font-bold text-dark-gray hover:text-navy transition-colors cursor-pointer">Lead Battery Scrap</a>
+                            <span class="text-navy font-bold">₹18,000/ton</span>
+                        </div>
+                        <p class="text-medium-gray mb-4">Used lead-acid batteries, collected for recycling.</p>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-sm text-gray-500">Kanpur, Uttar Pradesh</span>
+                        </div>
+                        <div class="flex gap-2">
+                            <a href="product-details.html?product=lead-battery-scrap" class="btn-navy flex-1 text-center">View Details</a>
+                            <button class="btn-secondary">Contact</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Listing 2 - Construction Debris -->
+                <div class="bg-white rounded-xl overflow-hidden card-hover shadow-lg product-card">
+                    <a href="product-details.html?product=construction-debris" class="block">
+                        <div class="h-48 relative cursor-pointer flex items-center justify-center overflow-hidden">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcToLh_Mu6J7AAPstLx6vyGCa6vHcEhgCuiF6A&s" alt="Construction Debris" class="w-full h-full object-cover" />
+                            <div class="absolute top-4 right-4 bg-white px-2 py-1 rounded text-sm font-medium text-gold">Verified</div>
+                        </div>
+                    </a>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-2">
+                            <a href="product-details.html?product=construction-debris" class="text-lg font-bold text-dark-gray hover:text-gold transition-colors cursor-pointer">Construction Debris</a>
+                            <span class="text-gold font-bold">₹2,000/ton</span>
+                        </div>
+                        <p class="text-medium-gray mb-4">Mixed construction waste, including concrete and bricks.</p>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-sm text-gray-500">Jaipur, Rajasthan</span>
+                        </div>
+                        <div class="flex gap-2">
+                            <a href="product-details.html?product=construction-debris" class="btn-gold flex-1 text-center">View Details</a>
+                            <button class="btn-secondary">Contact</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Listing 3 - Oil Sludge -->
+                <div class="bg-white rounded-xl overflow-hidden card-hover shadow-lg product-card">
+                    <a href="product-details.html?product=oil-sludge" class="block">
+                        <div class="h-48 relative cursor-pointer flex items-center justify-center overflow-hidden">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLwsFW8lnFtn1qD2k4PxDyZ1jvK6lL-NRbTg&s" alt="Oil Sludge" class="w-full h-full object-cover" />
+                            <div class="absolute top-4 right-4 bg-white px-2 py-1 rounded text-sm font-medium text-teal">Verified</div>
+                        </div>
+                    </a>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-2">
+                            <a href="product-details.html?product=oil-sludge" class="text-lg font-bold text-dark-gray hover:text-teal transition-colors cursor-pointer">Oil Sludge</a>
+                            <span class="text-teal font-bold">₹4,500/ton</span>
+                        </div>
+                        <p class="text-medium-gray mb-4">Industrial oil sludge, suitable for energy recovery.</p>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-sm text-gray-500">Vishakhapatnam, Andhra Pradesh</span>
+                        </div>
+                        <div class="flex gap-2">
+                            <a href="product-details.html?product=oil-sludge" class="btn-teal flex-1 text-center">View Details</a>
+                            <button class="btn-secondary">Contact</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Listing 4 - Food Waste -->
+                <div class="bg-white rounded-xl overflow-hidden card-hover shadow-lg product-card">
+                    <a href="product-details.html?product=food-waste" class="block">
+                        <div class="h-48 relative cursor-pointer flex items-center justify-center overflow-hidden">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOhExSX3Xmsv8l9b6pDpLz4UsHmSOW-5bpAQ&s" alt="Food Waste" class="w-full h-full object-cover" />
+                            <div class="absolute top-4 right-4 bg-white px-2 py-1 rounded text-sm font-medium text-gold">Verified</div>
+                        </div>
+                    </a>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-2">
+                            <a href="product-details.html?product=food-waste" class="text-lg font-bold text-dark-gray hover:text-gold transition-colors cursor-pointer">Food Waste</a>
+                            <span class="text-gold font-bold">₹1,200/ton</span>
+                        </div>
+                        <p class="text-medium-gray mb-4">Organic food waste, ideal for composting or biogas.</p>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-sm text-gray-500">Patna, Bihar</span>
+                        </div>
+                        <div class="flex gap-2">
+                            <a href="product-details.html?product=food-waste" class="btn-gold flex-1 text-center">View Details</a>
+                            <button class="btn-secondary">Contact</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Listing 5 - Pharma Waste -->
+                <div class="bg-white rounded-xl overflow-hidden card-hover shadow-lg product-card">
+                    <a href="product-details.html?product=pharma-waste" class="block">
+                        <div class="h-48 relative cursor-pointer flex items-center justify-center overflow-hidden">
+                            <img src="https://www.netsolwater.com/netsol-water/assets/img/product-images/The-Challenges-and-Solutions-of-Pharmaceutical-Waste-Disposal-in-STPs.jpg" alt="Pharma Waste" class="w-full h-full object-cover" />
+                            <div class="absolute top-4 right-4 bg-white px-2 py-1 rounded text-sm font-medium text-teal">Verified</div>
+                        </div>
+                    </a>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-2">
+                            <a href="product-details.html?product=pharma-waste" class="text-lg font-bold text-dark-gray hover:text-teal transition-colors cursor-pointer">Pharma Waste</a>
+                            <span class="text-teal font-bold">₹6,000/ton</span>
+                        </div>
+                        <p class="text-medium-gray mb-4">Expired medicines and pharmaceutical waste, handled safely.</p>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-sm text-gray-500">Ahmedabad, Gujarat</span>
+                        </div>
+                        <div class="flex gap-2">
+                            <a href="product-details.html?product=pharma-waste" class="btn-teal flex-1 text-center">View Details</a>
+                            <button class="btn-secondary">Contact</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Listing 6 - Ash (Fly Ash) -->
+                <div class="bg-white rounded-xl overflow-hidden card-hover shadow-lg product-card">
+                    <a href="product-details.html?product=ash-flyash" class="block">
+                        <div class="h-48 relative cursor-pointer flex items-center justify-center overflow-hidden">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNAVXr9HiWJc7bG3JX0SFTdgd08rdVk0BSLA&s" alt="Fly Ash" class="w-full h-full object-cover" />
+                            <div class="absolute top-4 right-4 bg-white px-2 py-1 rounded text-sm font-medium text-navy">Verified</div>
+                        </div>
+                    </a>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-2">
+                            <a href="product-details.html?product=ash-flyash" class="text-lg font-bold text-dark-gray hover:text-navy transition-colors cursor-pointer">Ash - Fly Ash</a>
+                            <span class="text-navy font-bold">₹1,800/ton</span>
+                        </div>
+                        <p class="text-medium-gray mb-4">Fly ash from power plants, suitable for cement manufacturing.</p>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-sm text-gray-500">Raipur, Chhattisgarh</span>
+                        </div>
+                        <div class="flex gap-2">
+                            <a href="product-details.html?product=ash-flyash" class="btn-navy flex-1 text-center">View Details</a>
+                            <button class="btn-secondary">Contact</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Pagination -->
+            <div class="flex justify-center mt-12">
+                <nav class="inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
+                    <a href="browse-waste.html" class="px-4 py-2 border border-gray-300 bg-white text-navy hover:bg-teal-50">1</a>
+                    <a href="browse-waste2.html" class="px-4 py-2 border border-gray-300 bg-white text-navy hover:bg-teal-50">2</a>
+                    <a href="browse-waste3.html" class="px-4 py-2 border border-gray-300 bg-teal-600 text-white font-bold">3</a>
+                </nav>
+            </div>
+        </div>
+    </section>
+    <script type="text/javascript">
+        (function(d, m){
+            var kommunicateSettings = 
+                {"appId":"19ea3bbfb7adac7350cb606167cdd1755","popupWidget":true,"automaticChatOpenOnNavigation":true};
+            var s = document.createElement("script"); s.type = "text/javascript"; s.async = true;
+            s.src = "https://widget.kommunicate.io/v2/kommunicate.app";
+            var h = document.getElementsByTagName("head")[0]; h.appendChild(s);
+            window.kommunicate = m; m._globals = kommunicateSettings;
+        })(document, window.kommunicate || {});
+    /* NOTE : Use web server to view HTML files as real-time update will not work if you directly open the HTML file in the browser. */
+    </script>
+</body>
+</html> 
